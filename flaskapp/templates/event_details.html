@@ -1,0 +1,168 @@
+{% extends "dashboardlayout.html" %}
+{% block content %}
+<script>
+    $(document).ready(function() {
+        $("body").css("background-color", "#353535");
+        if ($("#profile_type-0").prop('checked')) {
+                $('#companyDetails').hide();
+                console.log('hidden')
+            }
+        else if ($("#profile_type-1").prop('checked')) {
+                $('#companyDetails').show();
+                console.log('visible')
+            }
+        else {
+            $('#companyDetails').hide();
+            console.log('else')
+        }
+        $("#profile_type-0").change(function() {
+            if ($("#profile_type-0").prop('checked')) {
+                $('#companyDetails').hide();
+            }
+        });
+        $("#profile_type-1").change(function() {
+            if ($("#profile_type-1").prop('checked')) {
+                $('#companyDetails').show();
+            }
+        });
+    });
+</script>
+
+    <div class="row">
+        <div class="offset-lg-3 col-lg-6 offset-md-2 col-md-8 col-12">
+            <div class="row" style="width: 100%;text-align: center;margin-left: 1px;margin-bottom: 30px;">
+                {% if current_user.is_creator == True %}
+                    <div class="col" style="">
+                        <div class="btn-group" role="group" aria-label="Basic example" style="width: 100%;">
+                          <a class="btn btn-outline-danger" href="{{ url_for('personal_details') }}">Personal Details</a>
+                          <a class="btn btn-danger" href="{{ url_for('event_details') }}">Events Details</a>
+                          <a class="btn btn-outline-danger" href="{{ url_for('preference_details') }}">Preferences</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                          <a class="btn btn-danger" href="{{ url_for('personal_details') }}">Personal Details</a>
+                          <a class="btn btn-danger" href="{{ url_for('preference_details') }}">Preferences</a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+
+            <div class="row">
+                <div class="col-12" style="background-color: #fbfdff;padding: 20px;border-radius: 10px;">
+                    <div class="progress mb-3" style="height:25px;">
+                        {% if current_user.is_creator == True %}
+                            {% if current_user.personal_details_complete == False and current_user.preferences_complete == False and current_user.event_details_complete == False %}
+                                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            {% endif %}
+                            {% if current_user.personal_details_complete == True and current_user.preferences_complete == False and current_user.event_details_complete == False %}
+                                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: 33%" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+                            {% endif %}
+                            {% if current_user.personal_details_complete == False and current_user.preferences_complete == True and current_user.event_details_complete == False %}
+                                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: 33%" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+                            {% endif %}
+                            {% if current_user.personal_details_complete == False and current_user.preferences_complete == False and current_user.event_details_complete == True %}
+                                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: 33%" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+                            {% endif %}
+                            {% if current_user.personal_details_complete == False and current_user.preferences_complete == True and current_user.event_details_complete == True %}
+                                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                            {% endif %}
+                            {% if current_user.personal_details_complete == True and current_user.preferences_complete == False and current_user.event_details_complete == True %}
+                                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                            {% endif %}
+                            {% if current_user.personal_details_complete == True and current_user.preferences_complete == True and current_user.event_details_complete == False %}
+                                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                            {% endif %}
+
+                        {% endif %}
+                        {% if current_user.is_creator == False %}
+                            {% if current_user.personal_details_complete == False and current_user.preferences_complete == False %}
+                                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            {% endif %}
+                            {% if current_user.personal_details_complete == True and current_user.preferences_complete == False %}
+                                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            {% endif %}
+                            {% if current_user.personal_details_complete == False and current_user.preferences_complete == True %}
+                                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <form method="POST" action="">
+                        {{ form.hidden_tag() }}
+                        <fieldset class="form-group">
+                            <div class="form-group mb-2">
+                                {% if form.profile_type.errors %}
+                                    {{ form.profile_type(class="form-control form-control-md is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.profile_type.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                  <div class="row">
+                                      {% for subfield in form.profile_type %}
+                                          <div class="col-6">
+                                              <tr>
+                                                  <td>{{ subfield(class="btn-check") }}</td>
+                                                  <td>{{ subfield.label(class="btn btn-outline-danger", style="width:100%;") }}</td>
+                                              </tr>
+                                          </div>
+                                      {% endfor %}
+                                  </div>
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.location.label(class="form-label")}}
+                                {% if form.location.errors %}
+                                    {{ form.location(class="form-control form-control-md is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.location.errors %}
+                                        <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.location(class="form-control form-control-md mb-2", placeholder="Location") }}
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.tags.label(class="form-label")}}
+                                {% if form.tags.errors %}
+                                    {{ form.tags(class="form-control form-control-md is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.tags.errors %}
+                                        <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.tags(class="form-control form-control-md mb-2", placeholder="Tags") }}
+                                {% endif %}
+                            </div>
+                            <div  id="companyDetails">
+                                <div class="form-group">
+                                    {{ form.company_details.label(class="form-label")}}
+                                    {% if form.company_details.errors %}
+                                        {{ form.company_details(class="form-control form-control-md is-invalid") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.company_details.errors %}
+                                            <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form.company_details(class="form-control form-control-md mb-2", placeholder="Company Details", id="companyDetails") }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="form-group">
+                            {{ form.submit(class="btn btn-danger") }}
+                            <a href="{{ url_for('preference_details') }}" class="btn btn-danger">Next</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

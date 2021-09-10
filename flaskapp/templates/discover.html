@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% block content %}
+<script>
+    $(document).ready(function() {
+        $('body').addClass('zero-min-height');
+    });
+</script>
+<div class="row">
+    <div class="container-fluid main-header">
+        <div class="main-header-div">
+            <h1>Life's too short for boring experiences.</h1>
+            <p style="text-align: center;">Explore top-rated attractions, activities and more!</p>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="container" style="margin-bottom: 40px;margin-top: 40px;">
+    <div class="row">
+        <div class="col">
+            <div class="shadow" style="background-color: white;border-radius: 5px;">
+                <form method="POST" style="padding: 10px;">
+                    <div class="row">
+                        <div class="">
+                            <div class="input-group">
+                                {{ form.keyword(class="form-control discover-form discover-form1", placeholder="What are you looking for?") }}
+                                {{ form.location(class="form-control discover-form discover-form2", placeholder="location") }}
+                                {{ form.category(class="form-select discover-form discover-form3") }}
+                                {{ form.submitpsf(class="btn btn-danger discover-form discover-form4") }}
+                            </div>
+                        </div>
+                        <div class="" style="text-align: center;">
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row" style="margin-top: 30px;margin-bottom: 30px;">
+        {% if not events.items %}
+            <h4>No event found</h4>
+        {% endif %}
+        {% for event in events.items %}
+                <div class="col-4" style="margin-bottom:30px;">
+                    <div class="card h-100 event-card">
+                    <a href="{{ url_for('event', event_id=event.id) }}">
+                        <img src="{{ url_for('static', filename='event_pics/' + event.image1) }}" class="card-img-top" alt="">
+                    </a>
+                    <div class="card-body">
+                        <div class="pos-rel">
+                            <div class="card-percentage-outer-div pos-abs">
+                                <div class="pos-rel">
+                                        <div class="pos-abs card-percentage-inner-div"><div class="card-percentage-div"><p class="card-event-percentage">0%</p><p class="card-event-percentage-booked">booked</p></div></div>
+                                        <div class="pos-abs" style="right: 0;top: 30px;"><div><a class="btn btn-outline-danger btn-booking">Book Now</a></div></div>
+                                        <div class="pos-abs" style="right: 24px;top: 110px;"><div><a class="btn btn-wishlist"><i class="fa fa-heart-o fa-2x"></i></a></div></div>
+                                        <div class="pos-abs" style="right: 24px;top: 140px;"><div><a class="btn btn-cart"><i class="fa fa-shopping-cart fa-2x"></i></a></div></div>
+                                </div>
+                            </div>
+                            <h4 class="card-title"><a class="event-title" href="{{ url_for('event', event_id=event.id) }}">{{ event.title }}</a></h4>
+                            <div class="card-rate-div">
+                                <span class="card-event-rate">${{ event.price }}</span><span class="card-event-rate-person">/person</span>
+                            </div>
+                        </div>
+                        <div class="">
+                            <p class="card-review">Reviews: <span class="card-review-count">0</span></p>
+                            <div class="card-event-star-rating">
+                                <i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star-half-o card-event-star" aria-hidden="true"></i><i class="fa fa-star-o card-event-star" aria-hidden="true"></i>
+                            </div>
+                            <div class="card-event-days">
+                                <i class="fa fa-clock-o" aria-hidden="true"></i><span>{{ event.days }} day(s)</span>
+                            </div>
+                            <div class="card-event-location">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i><span> {{ event.location }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            {% endfor %}
+    </div>
+
+    {% for page_num in events.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+            {% if events.page == page_num %}
+                <a class="btn btn-info mb-4" href="{{ url_for('discover', page=page_num) }}">{{ page_num }}</a>
+            {% else %}
+                <a class="btn btn-outline-info mb-4" href="{{ url_for('discover', page=page_num) }}">{{ page_num }}</a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock content %}

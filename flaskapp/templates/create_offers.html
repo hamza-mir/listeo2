@@ -1,0 +1,40 @@
+{% extends "dashboardlayout.html" %}
+{% import "offers_form_macro.html" as macros %}
+{% block content %}
+<div class="row" style="margin-top: 30px;">
+    <div class="col-12 col-lg-6">
+        <div class="content-section">
+
+            <div class="row">
+                <div class="col-6">
+                    <h3>Create Offers</h3>
+                </div>
+                <div class="offset-5 col-1" style="padding-left: 0px;">
+                    <p id="add" class="btn btn-add" style="padding: 3px 8px 3px 8px;"><i class="bi bi-plus-lg"></i></p>
+                </div>
+            </div>
+
+            <hr/>
+
+            {# Show all subforms #}
+            <form id="offer-form" action="" method="POST" role="form">
+                {{ form.hidden_tag() }}
+
+                <div id="subforms-container">
+                    {% for subform in form.offers %}
+                        {{ macros.render_offer_form(subform, loop.index0) }}
+                    {% endfor %}
+                </div>
+                <button class="btn btn-danger" type="submit">Save</button>
+            </form>
+
+            {% if form.errors %}
+                {{ form.errors }}
+            {% endif %}
+
+            {# Form template #}
+            {{ macros.render_offer_form(_template, '_') }}
+        </div>
+    </div>
+ </div>
+{% endblock content %}

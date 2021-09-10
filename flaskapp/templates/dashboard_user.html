@@ -1,0 +1,41 @@
+{% extends "dashboardlayout.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        <div class="card" style="width: 16rem;">
+            <div class="card-body" style="position: relative;">
+                <div style="position: absolute; right: 20px;">
+                    <p style="font-size:60px;color: #64bc36;">0</p>
+                  </div>
+                <i class="fa fa-calendar-check-o" aria-hidden="true" style="color: #a8a8a85e;font-size: 5em;"></i>
+              <p class="card-title">Booked Events</p>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        <div class="card" style="width: 16rem;">
+            <div class="card-body" style="position: relative;">
+                <div style="position: absolute; right: 20px;">
+                    <p style="font-size:60px;color: black;">0</p>
+                  </div>
+                <i class="fa fa-calendar" aria-hidden="true" style="color: #a8a8a85e;font-size: 5em;"></i>
+              <p class="card-title">Total Events Booked</p>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        <div class="card" style="width: 16rem;">
+            <div class="card-body" style="position: relative;">
+                <div style="position: absolute; right: 20px;">
+                    <p style="font-size:60px;color: #f31742;">0</p>
+                  </div>
+                <i class="fa fa-commenting-o" aria-hidden="true" style="color: #a8a8a85e;font-size: 5em;"></i>
+              <p class="card-title">Events Reviewed</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

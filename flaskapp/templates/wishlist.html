@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block content %}
+<script>
+    $(document).ready(function() {
+        $('body').addClass('zero-min-height');
+        $('.footer').css({"width":"100%","position":"absolute","bottom":"0"})
+    });
+</script>
+<div class="container">
+    <h3>Wishlist</h3>
+</div>
+<div class="container">
+    <div class="row" style="margin-top: 30px;margin-bottom: 30px;">
+        {% if not events %}
+            <div class="container">
+                <div class="row">
+                    <div class="offset-lg-4 col-lg-4 ">
+                        <div style="padding: 30px;border: 1px solid #cacaca;background-color: white;border-radius: 10px;">
+                            <div style="text-align: center;">
+                                <h3>OOPS! Wishlist is empty!</h3>
+                            </div>
+                            <div style="text-align: center;margin-top:25px;">
+                                Looks like You have no Item in your Wishlist.
+                            </div>
+                            <div style="text-align: center;margin-top:25px;">
+                                <a href="{{ url_for('home') }}" class="btn btn-outline-danger">Return to Home Page</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% for event in events %}
+                <div class="col-4" style="margin-bottom:30px;">
+                    <div class="card h-100 event-card">
+                    <a href="{{ url_for('event', event_id=event.id) }}">
+                        <img src="{{ url_for('static', filename='event_pics/' + event.image1) }}" class="card-img-top" alt="">
+                    </a>
+                    <div class="card-body">
+                        <div class="pos-rel">
+                            <div class="card-percentage-outer-div pos-abs">
+                                <div class="pos-rel">
+                                        <div class="pos-abs card-percentage-inner-div"><div class="card-percentage-div"><p class="card-event-percentage">0%</p><p class="card-event-percentage-booked">booked</p></div></div>
+                                        <div class="pos-abs" style="right: 0;top: 30px;"><div><a class="btn btn-outline-danger btn-booking">Book Now</a></div></div>
+                                        <div class="pos-abs" style="right: 24px;top: 110px;"><div><a data-rep='{{ event.id }}' class="btn btn-wishlist"><i class="fa fa-heart-o fa-2x"></i></a></div></div>
+                                        <div class="pos-abs" style="right: 24px;top: 140px;"><div><a class="btn btn-cart"><i class="fa fa-shopping-cart fa-2x"></i></a></div></div>
+                                </div>
+                            </div>
+                            <h4 class="card-title"><a class="event-title" href="{{ url_for('event', event_id=event.id) }}">{{ event.title }}</a></h4>
+                            <div class="card-rate-div">
+                                <span class="card-event-rate">${{ event.price }}</span><span class="card-event-rate-person">/person</span>
+                            </div>
+                        </div>
+                        <div class="">
+                            <p class="card-review">Reviews: <span class="card-review-count">0</span></p>
+                            <div class="card-event-star-rating">
+                                <i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star-half-o card-event-star" aria-hidden="true"></i><i class="fa fa-star-o card-event-star" aria-hidden="true"></i>
+                            </div>
+                            <div class="card-event-days">
+                                <i class="fa fa-clock-o" aria-hidden="true"></i><span>{{ event.days }} day(s)</span>
+                            </div>
+                            <div class="card-event-location">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i><span> {{ event.location }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            {% endfor %}
+    </div>
+
+</div>
+{% endblock content %}

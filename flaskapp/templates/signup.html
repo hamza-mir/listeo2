@@ -1,0 +1,87 @@
+<div class="" id="login">
+  <form method="POST" action="{{ url_for('login') }}">
+      {{ login_form.hidden_tag() }}
+      <fieldset class="form-group">
+          <div class="form-group">
+              {% if login_form.email_login.errors %}
+                  {{ login_form.email_login(class="form-control form-control-md is-invalid") }}
+                  <div class="invalid-feedback">
+                      {% for error in login_form.email_login.errors %}
+                          <span>{{ error }}</span>
+                      {% endfor %}
+                  </div>
+              {% else %}
+                  {{ login_form.email_login(class="form-control form-control-md mb-2", placeholder="Email") }}
+              {% endif %}
+          </div>
+          <div class="form-group">
+              {% if login_form.password_login.errors %}
+                  {{ login_form.password_login(class="form-control form-control-md is-invalid") }}
+                  <div class="invalid-feedback">
+                      {% for error in login_form.password_login.errors %}
+                          <span>{{ error }}</span>
+                      {% endfor %}
+                  </div>
+              {% else %}
+                  {{ login_form.password_login(class="form-control form-control-md mb-2", placeholder="Password") }}
+              {% endif %}
+          </div>
+          <div class="form-check">
+              {{ login_form.remember(class="form-check-input") }}
+              {{ login_form.remember.label(class="form-check-label") }}
+          </div>
+      </fieldset>
+      <div class="form-group">
+          {{ login_form.submit_login(class="btn btn-danger") }}
+          <small class="text-muted ml-2">
+              <a href="">Forgot Password?</a>
+          </small>
+      </div>
+  </form>
+</div>
+<div class="" id="regis">
+  <form method="POST" action="{{ url_for('register') }}">
+      {{ regis_form.hidden_tag() }}
+      <fieldset class="form-group">
+          <div class="form-group">
+              {% if regis_form.username_regis.errors %}
+                  {{ regis_form.username_regis(class="form-control form-control-md is-invalid") }}
+                  <div class="invalid-feedback">
+                      {% for error in regis_form.username_regis.errors %}
+                          <span>{{ error }}</span>
+                      {% endfor %}
+                  </div>
+              {% else %}
+                  {{ regis_form.username_regis(class="form-control form-control-md mb-2", placeholder="Username") }}
+              {% endif %}
+          </div>
+          <div class="form-group">
+              {% if regis_form.email_regis.errors %}
+                  {{ regis_form.email_regis(class="form-control form-control-md is-invalid") }}
+                  <div class="invalid-feedback">
+                      {% for error in regis_form.email_regis.errors %}
+                          <span>{{ error }}</span>
+                      {% endfor %}
+                  </div>
+              {% else %}
+                  {{ regis_form.email_regis(class="form-control form-control-md mb-2", placeholder="Email") }}
+              {% endif %}
+          </div>
+          <div class="form-group">
+              {% if regis_form.password_regis.errors %}
+                  {{ regis_form.password_regis(class="form-control form-control-md is-invalid") }}
+                  <div class="invalid-feedback">
+                      {% for error in regis_form.password_regis.errors %}
+                          <span>{{ error }}</span>
+                      {% endfor %}
+                  </div>
+              {% else %}
+                  {{ regis_form.password_regis(class="form-control form-control-md mb-2", placeholder="Password") }}
+              {% endif %}
+          </div>
+      </fieldset>
+      <div class="form-group">
+          {{ regis_form.submit_regis(class="btn btn-danger") }}
+      </div>
+  </form>
+</div>

@@ -1,0 +1,45 @@
+{% extends "dashboardlayout.html" %}
+{% block content %}
+    <div class="container">
+        <h4 style="margin-top: 20px;">Notifications</h4>
+    </div>
+    <div class="row">
+        <div class="col-10">
+            <div class="container shadow" style="background-color: white;">
+                <div class="table-div">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>Event</th>
+                          <th>Notification</th>
+                          <th>Person</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          {% for item in notifications %}
+                            <tr>
+                                <td>{{ item.date }}</td>
+                                <td>{{ item.event }}</td>
+                                <td>
+                                    {{ item.title }}
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <i class="fa fa-user-circle-o" style="font-size: 35px;"></i>
+                                        </div>
+                                        <div class="col-12">
+                                            {{ item.fullname }}
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                          {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

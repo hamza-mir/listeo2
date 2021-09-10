@@ -1,0 +1,416 @@
+body {
+    min-height: 75rem;
+    padding-top: 5rem;
+    background-color: #f5f5f5;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    position:relative;
+    font-family: "Poppins", sans-serif;
+  }
+.middle {
+    display: inline-block;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+.red {
+  color: red;
+}
+
+.zero-min-height {
+  max-height: 100vh !important;
+}
+
+.navbar{
+  min-height: 65px;
+  padding-bottom: 5px;
+  padding-top: 10px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+.btn-user{
+  color: red;
+  font-size: 45px;
+  padding: 0px;
+}
+.btn-search{
+  font-size: 1.2rem;
+  background-color: white;
+  color: rgb(0, 0, 0);
+  border-radius: 0px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.search-bar {
+  border-radius: 0px;
+  border-right-width: 0px;
+  border: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.btn-user:hover{
+  color: rgb(124, 1, 1);
+}
+.btn-login:hover{
+  color: red;
+}
+.btn-login:focus {
+  border: none;
+  box-shadow: none;
+}
+.nav-form {
+  margin-right: 450px;
+}
+/*
+.dropstart .dropdown-menu[data-bs-popper] {
+  top: 100%;
+  right: 0.1%;
+  left: auto;
+}
+*/
+
+.modal-header {
+  background-color: #e4e4e4;
+}
+.modal-body {
+  background-color: #f6f6f6;
+}
+
+.main-header {
+  min-height: 500px;
+  background-image: url("shutterstock_758264113-small-1600x700.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  top: -15px;
+}
+.main-header-div {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.pos-abs {
+  position: absolute;
+}
+
+.pos-rel {
+  position: relative;
+}
+
+.offset-2-edited {
+  margin-left: 12%;
+}
+
+.heading-container {
+  margin-left: 5%;
+}
+
+.carousel-card {
+  margin-bottom: 20px;
+}
+
+.event-card {
+  box-shadow: 8px 8px 10px #ccc;
+}
+.card-img-top {
+    height:250px;
+}
+.card-percentage-outer-div {
+  right: 0;
+}
+
+.card-percentage-inner-div {
+  right: 0;
+  top: -37px;
+}
+
+.card-percentage-div {
+  background-color: #e8e8e8;
+  border-radius: 50%;
+  right: 10px;
+  position: relative;
+  padding: 8px;
+  height: 55px;
+  width: 55px;
+}
+
+.card-event-percentage {
+  margin: 0;
+  position: relative;
+  left: 1px;
+  top: 2px;
+  font-weight: bold;
+  color: red;
+  font-size: large;
+}
+
+.card-event-percentage-booked {
+  margin: 0;
+  font-size: 10px;
+  top: -8px;
+  position: relative;
+  color: red;
+  left: 2px;
+}
+
+
+.card-span-text {
+  margin: 0;
+  font-size: x-small;
+  top: -5px;
+  position: relative;
+}
+
+.card-span-booking-button {
+  position: absolute;
+  top: 280px;
+  left: 225px;
+  font-weight: bold;
+}
+
+.btn-booking {
+  padding: 0px 4px 0px 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: small;
+  font-weight: bold;
+  border-width: 2px;
+}
+
+.card-span-wishlist-button {
+  position: absolute;
+  top: 340px;
+  left: 252px;
+  font-weight: bold;
+}
+
+.btn-wishlist {
+  padding: 0px;
+}
+
+.fa-heart-o {
+  font-size: 1.5em;
+  color: red;
+}
+
+.fa-heart {
+  font-size: 1.5em;
+  color: red;
+}
+
+.card-span-cart-button {
+  position: absolute;
+  top: 370px;
+  left: 252px;
+  font-weight: bold;
+}
+
+.btn-cart {
+  padding: 0px;
+}
+
+.fa-shopping-cart {
+  font-size: 1.7em;
+  color: red;
+}
+
+.card-body {
+  padding-top: 8px;
+}
+
+.card-title {
+  margin-bottom: 0px;
+}
+
+.card-event-rate {
+  margin-bottom: 8px;
+  display: inline-block;
+  color: red;
+  font-weight: bold;
+}
+.card-event-rate-person {
+  margin-bottom: 8px;
+}
+.card-rate-div {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.card-review {
+  margin-bottom: 0px;
+  margin-top: 20px;
+}
+
+.card-event-star {
+  color: gold;
+}
+
+.find-events-heading {
+  color: white;
+}
+
+.container-find-events {
+  background: #2b2b2b;
+  padding: 30px;
+}
+
+.card-find-events {
+  background-color: transparent;
+  border: none;
+}
+
+.div-btn-card-find-events {
+  text-align: center;
+}
+.btn-dark {
+  background-color: #111;
+  border-color: #212529;
+}
+
+.card-coming-soon-footer {
+  text-align: center;
+  background-color: #d21012;
+  border: none;
+}
+
+.coming-soon {
+  color: white;
+}
+
+.footer {
+  background-color: #111111;
+  padding: 30px 0px 8px 0px;
+}
+
+.footer-div {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.footer-heading {
+  margin-bottom: 30px;
+}
+
+.footer-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-list-link {
+  text-decoration: none;
+  color: white;
+}
+.footer-list-link:hover {
+  text-decoration: none;
+  color: red;
+}
+.white {
+  color: white;
+}
+.copyright-div {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.div-discover {
+  border-color: #3c3c3c;
+  border-left-width: 0.1em;
+  border-left-style: solid;
+  border-right-width: 0.1em;
+  border-right-style: solid;
+}
+.modal-dialog {
+  max-width: 400px;
+}
+.modal-body {
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 24px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.modal-header {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+@media (max-width:992px){
+  .clg {
+    display: none !important;
+  }
+}
+
+.alert-bar {
+  position: fixed;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 2;
+}
+.discover-form1 {
+  border: none;
+  border-right-width: 2px;
+  border-right-style: solid;
+  border-right-color: #c6c6c6;
+}
+.discover-form2 {
+  border: none;
+  border-right-width: 2px;
+  border-right-style: solid;
+  border-right-color: #c6c6c6;
+}
+.discover-form3 {
+  border: none;
+  border-right-width: 1px;
+  border-right-style: solid;
+  border-right-color: #c6c6c6;
+}
+.discover-form4 {
+  margin-left: 10px !important;
+  border-radius: 5px !important;
+}
+.discover-form::-webkit-input-placeholder { /* Edge */
+  color: black;
+}
+
+.discover-form:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: black;
+}
+
+.discover-form::placeholder {
+  color: black;
+}
+a.event-title {
+  color: black;
+  text-decoration: none;
+}
+a.event-title:hover {
+  color: red;
+}
+.form-control:focus {
+    border-color: black;
+    box-shadow: none;
+}
+.navbar-heart:focus {
+    border-color: black;
+    box-shadow: none;
+}
+.navbar-cart:focus {
+    border-color: black;
+    box-shadow: none;
+}
+.event-remove-cart:hover {
+  cursor: pointer;
+}
+.no-footer {
+    min-height:0 !important;
+}

@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="{{ url_for('static', filename='layout.js') }}"></script>
+    <script src="{{ url_for('static', filename='cart.js') }}"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet" />
+    {% if title %}
+        <title>{{ title }} - Listeo</title>
+    {% else %}
+        <title>Listeo</title>
+    {% endif %}
+  </head>
+  <body>
+    <div>
+    <div>
+        <!-- Top navigation
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Listeo</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#">Discover</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#">Events</a>
+                  </li>
+                </ul>
+
+                <form class="d-flex nav-form">
+                  <input class="form-control search-bar" type="search" placeholder="Search" aria-label="Search">
+                  <button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
+                </form>
+
+                {% if current_user.is_authenticated %}
+                <div class="d-flex">
+                  <div class="dropdown">
+                    <button class="btn btn-user" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-user-circle-o"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                      <li><a class="dropdown-item" href="#">Account</a></li>
+                      <li><a class="dropdown-item" href="#">...</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+                    </ul>
+                  </div>
+                </div>
+                {% else %}
+                <div class="d-flex">
+                  <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#loginModal">
+                    Login
+                  </button>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+        </nav>-->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse" style="position: absolute;left: 30px;">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="navbar-brand active" href="{{ url_for('home') }}">Listeo</a>
+                        </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ url_for('discover') }}">Discover</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ url_for('allevents') }}">Events</a>
+                            </li>
+
+                                {% if current_user.is_authenticated %}
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{{ url_for('dashboard') }}">Dashboard</a>
+                                    </li>
+                                {% endif %}
+                    </ul>
+                </div>
+                <div style="margin:auto;">
+                    <form class="d-flex" method="POST"  action="{{ url_for('search') }}">
+                        {{ search_form.hidden_tag() }}
+                        {{ search_form.searchword(class="form-control search-bar", placeholder="Search") }}
+                        <button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div style="position: absolute;right: 30px;">
+                    {% if current_user.is_authenticated %}
+                        <div class="d-flex">
+                            <div class="nav-btn-div">
+                                <a class="btn navbar-heart" href="{{ url_for('wishlist') }}" style="font-size: 20px;margin-top: 12px;margin-right: 10px;">
+                                    <i class="fa fa-heart"></i>
+                                </a>
+                            </div>
+                            <div class="nav-btn-div">
+                                <a class="btn navbar-cart" href="{{ url_for('cart') }}" style="font-size: 20px;margin-top: 10px;margin-right: 20px;">
+                                    <i class="fa fa-shopping-cart"></i>
+                                </a>
+                            </div>
+                            <div class="dropdown">
+                                <button style="font-size:40px;" class="btn btn-user" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-user-circle-o"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">Account</a></li>
+                                <li><a class="dropdown-item" href="#">...</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="d-flex">
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#loginModal" id="loginButton">
+                                Login
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
+          <!-- Sign In Modal -->
+          <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered ">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <button id="login" class="btn btn-login btn-md">Log In</button>
+                  <button id="regis" class="btn btn-login btn-md">Register</button><hr style="margin-top: 0px;">
+                  <div class="" id="login">
+                      <form method="POST" action="{{ url_for('login') }}">
+                          {{ login_form.hidden_tag() }}
+                          <fieldset class="form-group">
+                              <div class="form-group">
+                                  {% if login_form.email_login.errors %}
+                                        <script>
+                                          $(document).ready(function(){
+                                              $('#loginButton').trigger('click');
+                                              $('button#login').trigger('click');
+                                          });
+                                        </script>
+                                      {{ login_form.email_login(class="form-control form-control-md is-invalid") }}
+                                      <div class="invalid-feedback">
+                                          {% for error in login_form.email_login.errors %}
+                                              <span>{{ error }}</span>
+                                          {% endfor %}
+                                      </div>
+                                  {% else %}
+                                      {{ login_form.email_login(class="form-control form-control-md mb-2", placeholder="Email/Username") }}
+                                  {% endif %}
+                              </div>
+                              <div class="form-group">
+                                  {% if login_form.password_login.errors %}
+                                        <script>
+                                          $(document).ready(function(){
+                                              $('#loginButton').trigger('click');
+                                              $('button#login').trigger('click');
+                                          });
+                                        </script>
+                                      {{ login_form.password_login(class="form-control form-control-md is-invalid") }}
+                                      <div class="invalid-feedback">
+                                          {% for error in login_form.password_login.errors %}
+                                              <span>{{ error }}</span>
+                                          {% endfor %}
+                                      </div>
+                                  {% else %}
+                                      {{ login_form.password_login(class="form-control form-control-md mb-2", placeholder="Password") }}
+                                  {% endif %}
+                              </div>
+                              <div class="form-check">
+                                  {{ login_form.remember(class="form-check-input") }}
+                                  {{ login_form.remember.label(class="form-check-label") }}
+                              </div>
+                          </fieldset>
+                          <div class="form-group">
+                              {{ login_form.submit_login(class="btn btn-danger") }}
+                              <small class="text-muted ml-2">
+                                  <a href="{{ url_for('reset_request') }}">Forgot Password?</a>
+                              </small>
+                          </div>
+                      </form>
+                  </div>
+                  <div class="" id="regis">
+                      <form method="POST" action="{{ url_for('register') }}">
+                          {{ regis_form.hidden_tag() }}
+                          <fieldset class="form-group">
+                              <div class="form-group">
+                                  {% if regis_form.username_regis.errors %}
+                                      {{ regis_form.username_regis(class="form-control form-control-md is-invalid") }}
+                                      <script>
+                                          $(document).ready(function(){
+                                              $('#loginButton').trigger('click');
+                                              $('button#regis').trigger('click');
+                                          });
+                                      </script>
+                                      <div class="invalid-feedback">
+                                          {% for error in regis_form.username_regis.errors %}
+                                              <span>{{ error }}</span>
+                                          {% endfor %}
+                                      </div>
+                                  {% else %}
+                                      {{ regis_form.username_regis(class="form-control form-control-md mb-2", placeholder="Username") }}
+                                  {% endif %}
+                              </div>
+                              <div class="form-group">
+                                  {% if regis_form.email_regis.errors %}
+                                      {{ regis_form.email_regis(class="form-control form-control-md is-invalid") }}
+                                      <script>
+                                          $(document).ready(function(){
+                                              $('#loginButton').trigger('click');
+                                              $('button#regis').trigger('click');
+                                          });
+                                      </script>
+                                      <div class="invalid-feedback">
+                                          {% for error in regis_form.email_regis.errors %}
+                                              <span>{{ error }}</span>
+                                          {% endfor %}
+                                      </div>
+                                  {% else %}
+                                      {{ regis_form.email_regis(class="form-control form-control-md mb-2", placeholder="Email") }}
+                                  {% endif %}
+                              </div>
+                              <div class="form-group">
+                                  {% if regis_form.password_regis.errors %}
+                                      {{ regis_form.password_regis(class="form-control form-control-md is-invalid") }}
+                                      <div class="invalid-feedback">
+                                          {% for error in regis_form.password_regis.errors %}
+                                              <span>{{ error }}</span>
+                                          {% endfor %}
+                                      </div>
+                                  {% else %}
+                                      {{ regis_form.password_regis(class="form-control form-control-md mb-2", placeholder="Password") }}
+                                  {% endif %}
+                              </div>
+                              <div class="form-group mb-2">
+                                {% if regis_form.recaptcha.errors %}
+                                      {{ regis_form.recaptcha }}
+                                      <script>
+                                          $(document).ready(function(){
+                                              $('#loginButton').trigger('click');
+                                              $('button#regis').trigger('click');
+                                          });
+                                      </script>
+                                      <div class="">
+                                          {% for error in regis_form.recaptcha.errors %}
+                                              <span style="font-size: .875em;color: #dc3545;"> {{ error }} </span>
+                                          {% endfor %}
+                                      </div>
+                                 {% else %}
+                                      {{ regis_form.recaptcha }}
+                                 {% endif %}
+
+                            </div>
+                          </fieldset>
+                          <div class="form-group">
+                              {{ regis_form.submit_regis(class="btn btn-danger") }}
+                          </div>
+                      </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+              <div class="col-lg-4 offset-lg-4">
+                    <div class="alert-bar">
+                      {% with messages = get_flashed_messages(with_categories=true) %}
+                          {% if messages %}
+                              {% for category, message in messages %}
+                              <div class="alert alert-{{ category }} alert-dismissible">
+                                  {{ message }}
+                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                              </div>
+                              {% endfor %}
+                            {% endif %}
+                      {% endwith %}
+                  </div>
+              </div>
+          </div>
+        <div class="cart-alert">
+        </div>
+    </div>
+
+    {% block content %}{% endblock %}
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row footer-row">
+                <div class="col-12 col-sm-6 col-lg-3 footer-div">
+                    <div class="footer-event-slogan-div">
+                    <img class="img-responsive footer-event-slogan" src="{{ url_for('static', filename='eventslogan.PNG') }}" alt="Chania" width="200" height="200">
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3 footer-div">
+                    <h3 class="white footer-heading">Head Quarters</h3>
+                    <ul class="footer-list white">
+                        <li>23 Main Street,</li>
+                        <li>New York, NY 10030</li>
+                        <li>001-200-5255</li>
+                        <li>contact@events.com</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3 footer-div div-discover">
+                    <h3 class="white footer-heading">Discover</h3>
+                    <ul class="footer-list white">
+                        <li><a href="#" class="footer-list-link">This Week</a></li>
+                        <li><a href="#" class="footer-list-link">All Events</a></li>
+                        <li><a href="#" class="footer-list-link">Featured Events</a></li>
+                        <li><a href="#" class="footer-list-link">Trending Events</a></li>
+                        <li><a href="#" class="footer-list-link">Event Categories</a></li>
+                        <li><a href="#" class="footer-list-link">Create Events</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3 footer-div">
+                    <h3 class="white footer-heading">Quick Links</h3>
+                    <ul class="footer-list white">
+                        <li><a href="#" class="footer-list-link">Blog</a></li>
+                        <li><a href="#" class="footer-list-link">Support</a></li>
+                        <li><a href="#" class="footer-list-link">About Us</a></li>
+                        <li><a href="#" class="footer-list-link">Contact Us</a></li>
+                        <li><a href="#" class="footer-list-link">Policy & Procedure</a></li>
+                        <li><a href="#" class="footer-list-link">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright-div">
+                <p class="white">
+                    Privacy Policy | copyright (c) 2021, Events
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,183 @@
+{% extends "layout.html" %}
+{% block content %}
+<script>
+    $(document).ready(function() {
+        $('body').addClass('zero-min-height');
+        $('.footer').css({"width":"100%","position":"absolute","bottom":"0"})
+    });
+</script>
+
+<div class="container" style="margin-top: 50px;margin-bottom: 50px;">
+    {% if event.event_author == current_user%}
+        <div class="row">
+            <div class="col-12">
+                <div>
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_event', event_id=event.id) }}">Edit</a>
+                    <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-8">
+            <div class="row"><div class="col-12">
+                <h1 style="position: relative;">{{ event.title }}
+                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#messageModal">
+                      Contact Creator
+                    </button>
+                    <span style="font-size: 20px;position: absolute;right: 0;top: 15px;" class="badge bg-danger">0% Booked</span>
+                </h1>
+            </div>
+        </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <p>
+                        <span style="color: red;font-size: 20px;font-weight: bold;">${{ event.price }}</span>/Person
+                    </p>
+                    <div style="position: relative;">
+                                <span style="font-size: 20px;position: absolute;right: 0;top: -50px;">
+                                    <div><a data-rep='{{ event.id }}' class="btn btn-cart" style="font-size: 22px;"><i class="fa fa-shopping-cart fa-2x"></i></a></div></span>
+                            </div>
+                </div>
+            </div>
+            <div class="row  ">
+                <div class="col-3">
+                    <p><i class="bi bi-calendar-week-fill"></i> {{ event.date.strftime('%Y-%m-%d') }} </p>
+                </div>
+                <div class="col-auto">
+                    <p><i class="bi bi-clock"></i>{{ event.time }} {% if event.time_end %}to {{ event.time_end }} {% endif %}</p>
+                </div>
+                <div style="position: relative;">
+                    <span style="font-size: 20px;position: absolute;right: 10px;top: -45px;">
+                        <div>
+                            <a data-rep='{{ event.id }}' class="btn btn-outline-danger btn-booking" style="padding: 6px 12px 6px 12px;white-space: nowrap;overflow: hidden;font-size: medium;font-weight: inherit;border-width: 1px;">
+                                Book Now
+                            </a>
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <div class="row"><div class="col-12"><p><i class="bi bi-geo-alt-fill"></i>{{ event.location }}</p></div></div>
+            {% if event.offers_bool == True %}
+                {% if event.discount1 or event.discount2 or event.discount3 or event.discount4 %}
+                    <div class="row"><div class="col-12"><h5 style="font-weight: bold;">Group Offers</h5></div></div>
+                        <div class="row"><div class="col-12">
+                            {% if event.discount1 %}<p style="margin-bottom: 0;"><span style="color: red;font-size: 20px;font-weight: bold;">${{ event.discount1 }}</span>/each for a group of {{ event.attendee1 }}</p>{% endif %}
+                            {% if event.discount2 %}<p style="margin-bottom: 0;"><span style="color: red;font-size: 20px;font-weight: bold;">${{ event.discount2 }}</span>/each for a group of {{ event.attendee2 }}</p>{% endif %}
+                            {% if event.discount3 %}<p style="margin-bottom: 0;"><span style="color: red;font-size: 20px;font-weight: bold;">${{ event.discount3 }}</span>/each for a group of {{ event.attendee3 }}</p>{% endif %}
+                            {% if event.discount4 %}<p style="margin-bottom: 1rem;"><span style="color: red;font-size: 20px;font-weight: bold;">${{ event.discount4 }}</span>/each for a group of {{ event.attendee4 }}</p>{% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+            <div class="row"><div class="col-12"><h5 style="font-weight: bold;">Description:</h5></div></div>
+            <div class="row"><div class="col-12">
+                <p>{{event.description}}</p>
+            </div></div>
+            {% if event.schedule %}
+                <div class="row"><div class="col-12"><h5 style="font-weight: bold;">Schedule:</h5></div></div>
+                <div class="row"><div class="col-12">
+                    <p>{{event.schedule}}</p>
+                </div></div>
+            {% endif %}
+            {% if event.direction %}
+                <div class="row"><div class="col-12"><h5 style="font-weight: bold;">Direction:</h5></div></div>
+                <div class="row"><div class="col-12">
+                    <p>{{event.direction}}</p>
+                </div></div>
+            {% endif %}
+            {% if event.equipment %}
+                <div class="row"><div class="col-12"><h5 style="font-weight: bold;">Equipment:</h5></div></div>
+                <div class="row"><div class="col-12">
+                    <p>{{event.equipment}}</p>
+                </div></div>
+            {% endif %}
+            <div class="row"><div class="col-12"><p>Family Friendly/Kids Allowed: No {{event.family}}</p></div></div>
+
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <div class="col-12">
+                    <img src="{{ url_for('static', filename='event_pics/' + event.image1) }}" alt="" height="400px" width="400px">
+                </div>
+            </div>
+            {% if event.image2 or event.image3 or event.image4 %}
+                <div class="row">
+                    <div class="col-auto">
+                        <img src="{{ url_for('static', filename='event_pics/' + event.image2) }}" alt="" height="100px" width="100px">
+                    </div>
+                    <div class="col-auto">
+                        <img src="{{ url_for('static', filename='event_pics/' + event.image3) }}" alt="" height="100px" width="100px">
+                    </div>
+                    <div class="col-auto">
+                        <img src="{{ url_for('static', filename='event_pics/' + event.image4) }}" alt="" height="100px" width="100px">
+                    </div>
+                </div>
+            {% endif %}
+            {% if event.image5 or event.image6 or event.image7 %}
+                <div class="row">
+                    <div class="col-auto">
+                        <img src="{{ url_for('static', filename='event_pics/' + event.image5) }}" alt="" height="100px" width="100px">
+                    </div>
+                    <div class="col-auto">
+                        <img src="{{ url_for('static', filename='event_pics/' + event.image6) }}" alt="" height="100px" width="100px">
+                    </div>
+                    <div class="col-auto">
+                        <img src="{{ url_for('static', filename='event_pics/' + event.image7) }}" alt="" height="100px" width="100px">
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <!-- Message Modal -->
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Send Message to creator</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <form method="POST" action="{{ url_for('sendmsgtocreator', eventid=event.id) }}">
+                {% if current_user.is_authenticated %}
+                    <div class="mb-3">
+                        {{ msg_form.content_msg(class="form-control mb-3", placeholder="Message Body") }}
+                        <div style="text-align:center;">
+                            {{ msg_form.submit_msg(class="btn btn-outline-danger", id="msg-submit-btn") }}
+                        </div>
+                    </div>
+                {% endif %}
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% if event.event_author == current_user%}
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form action="{{ url_for('delete_event', event_id=event.id) }}" method="POST">
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock content %}

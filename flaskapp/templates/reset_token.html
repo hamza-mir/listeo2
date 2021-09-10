@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+<script>
+    $(document).ready(function() {
+        $('body').addClass('no-footer');
+        $('footer').remove();
+    });
+</script>
+    <div class="container">
+        <div class="row">
+            <div class="offset-lg-3 col-lg-6 offset-md-2 col-md-8 offset-sm-1 col-sm-10 col-12">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Reset Password</legend>
+                        <div class="form-floating mb-3">
+                            {% if form.password.errors %}
+                                {{ form.password(class="form-control is-invalid", id="floatingInput1",  placeholder="password") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.password.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.password(class="form-control", id="floatingInput1",  placeholder="password") }}
+                            {% endif %}
+                            <label for="floatingInput1">Password</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            {% if form.confirm_password.errors %}
+                                {{ form.confirm_password(class="form-control is-invalid", id="floatingInput2",  placeholder="password") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.confirm_password.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.confirm_password(class="form-control", id="floatingInput2",  placeholder="password") }}
+                            {% endif %}
+                            <label for="floatingInput2">Confirm Password</label>
+                        </div>
+                    </fieldset>
+                    <div class="form-group" style="text-align: center;">
+                        {{ form.submit(class="btn btn-outline-danger") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

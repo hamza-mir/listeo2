@@ -1,0 +1,37 @@
+
+    {%- macro render_offer_form(subform, index) %}
+        
+        <div id="offer-{{ index }}-form" class="{% if index != '_' %}subform{% else %}is-hidden{% endif %}" data-index="{{ index }}">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-5">
+                        {% if subform.attendee.errors %}
+                            {{ subform.attendee(class="form-control form-control-md is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in subform.attendee.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ subform.attendee(class="form-control form-control-md mb-2", placeholder="Attendee Amount") }}
+                        {% endif %}
+                    </div>
+                    <div class="col-5">
+                        {% if subform.discount.errors %}
+                            {{ subform.discount(class="form-control form-control-md is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in subform.discount.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ subform.discount(class="form-control form-control-md mb-2", placeholder="Discount") }}
+                        {% endif %}
+                    </div>
+                    <div class="offset-1 col-1" style="padding: 0px;">
+                        <p class="remove btn btn-remove" style="padding: 6px 8px 6px 8px;" id='offer-{{ index }}-remove'><i class="bi bi-trash"></i></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {%- endmacro %}

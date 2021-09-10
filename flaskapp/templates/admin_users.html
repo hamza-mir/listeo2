@@ -1,0 +1,43 @@
+{% extends "adminlayout.html" %}
+{% block content %}
+    <h4 style="margin-top: 20px;">Users</h4>
+    <div class="row">
+        <div class="col-lg-10 shadow table-div">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Events</th>
+                <th>Profile Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for user in users.items %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>See booked Events</td>
+                    <td>{% if user.is_profile_complete==true %}Complete{% else %}Incomplete{% endif %}</td>
+                    <td><a href="" class="table-link tl-delete">Delete User</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    </div>
+    <div style="margin-top: 20px;">
+        {% for page_num in users.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% if page_num %}
+                {% if users.page == page_num %}
+                    <a class="btn btn-danger mb-4" href="{{ url_for('admin_users', page=page_num) }}">{{ page_num }}</a>
+                {% else %}
+                    <a class="btn btn-outline-danger mb-4" href="{{ url_for('admin_users', page=page_num) }}">{{ page_num }}</a>
+                {% endif %}
+            {% else %}
+                ...
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock content %}

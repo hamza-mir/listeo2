@@ -1,0 +1,7 @@
+{% extends "dashboardlayout.html" %}
+{% block content %}
+    <h2>Account</h2>
+    {% if completion==False %}
+        <p>Your account details are Incomplete! <a href="{{ url_for('account_details') }}">Complete Registration flow here</a></p>   
+    {% endif %}
+{% endblock content %}

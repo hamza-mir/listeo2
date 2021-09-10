@@ -1,0 +1,90 @@
+{% extends "adminlayout.html" %}
+{% block content %}
+    <h4 style="margin-top: 20px;">Recent Events</h4>
+    <div class="row">
+        <div class="col-lg-10 shadow table-div">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Event Name</th>
+                <th>Created</th>
+                <th>Booked</th>
+                <th>Status</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                <tr>
+                    <td><a href="{{ url_for('adminevent', eventid=event.id) }}" class="table-link tl-title">{{ event.title }}</a></td>
+                    <td>{{ event.date_posted.strftime('%Y-%m-%d') }}</td>
+                    <td>0%</td>
+                    <td>Completed</td>
+                    <td><a href="" class="table-link tl-prioritize">Prioritize !</a></td>
+                    <td><a href="{{ url_for('admin_update_event', event_id=event.id) }}" class="table-link tl-repost">Repost <i class="fa fa-repeat" aria-hidden="true"></i></a></td>
+                    <td><a href="{{ url_for('admin_update_event', event_id=event.id) }}" class="table-link tl-edit">Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                    <td><a href="{{ url_for('admin_delete_event', event_id=event.id) }}" class="table-link tl-delete">Delete <i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    </div>
+    <h4 style="margin-top: 20px;">Recent Creators</h4>
+    <div class="row">
+        <div class="col-lg-10 shadow table-div">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Events</th>
+                <th>Profile Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for creator in creators %}
+                <tr>
+                    <td>{{ creator.username }}</td>
+                    <td>{{ creator.email }}</td>
+                    <td><a href="{{ url_for('admin_creator_events', user_id=creator.id) }}" class="table-link tl-delete">See All Events</a></td>
+                    <td>{% if creator.is_profile_complete==true %}Complete{% else %}Incomplete{% endif %}</td>
+                    <td><a href="" class="table-link tl-delete">Delete User</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    </div>
+    <h4 style="margin-top: 20px;">Recent Users</h4>
+    <div class="row">
+        <div class="col-lg-10 shadow table-div">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Events</th>
+                <th>Profile Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>See booked Events</td>
+                    <td>{% if user.is_profile_complete==true %}Complete{% else %}Incomplete{% endif %}</td>
+                    <td><a href="" class="table-link tl-delete">Delete User</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    </div>
+{% endblock content %}

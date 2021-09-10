@@ -1,0 +1,532 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row">
+    <div class="container-fluid main-header">
+        <div class="main-header-div">
+            <h1>Life's too short for boring experiences.</h1>
+            <p style="text-align: center;">Explore top-rated attractions, activities and more!</p>
+        </div>
+    </div>
+</div>
+<br>
+<!--============== Special Offers ===============-->
+<div class="row">
+    <div class="col">
+        <div class="">
+            <h3 style="font-weight: bold;margin-left: 12%;">Special Offers</h3>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div id="carouselOffersControls" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="false">
+        <div class="carousel-inner clg">
+          <div class="carousel-item active carousel-card">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for event in events_s1 %}
+                    <div class="col-3 {% if loop.index0==0 %} offset-2-edited {% endif %}">
+                        <div class="card h-100 event-card">
+                        <a href="{{ url_for('event', event_id=event.id) }}">
+                            <img src="{{ url_for('static', filename='event_pics/' + event.image1) }}" class="card-img-top" alt="">
+                        </a>
+                        <div class="card-body">
+                            <div class="pos-rel">
+                                <div class="card-percentage-outer-div pos-abs">
+                                    <div class="pos-rel">
+                                            <div class="pos-abs card-percentage-inner-div"><div class="card-percentage-div"><p class="card-event-percentage">0%</p><p class="card-event-percentage-booked">booked</p></div></div>
+                                            <div class="pos-abs" style="right: 0;top: 30px;"><div><a data-rep='{{ event.id }}' class="btn btn-outline-danger btn-booking">Book Now</a></div></div>
+                                            {% if current_user.is_authenticated %}
+                                                {% if current_user.wishlist_user %}
+                                                    {% set user_wishlist = current_user.wishlist_user %}
+                                                    {% set event_wishlist = event.event_wishlist %}
+                                                    {% for itemu in user_wishlist %}
+                                                        {% for iteme in event_wishlist %}
+                                                            {% if iteme.id == itemu.id %}
+                                                                <div class="pos-abs" style="right: 24px;top: 110px;"><div><a data-rep='{{ event.id }}' class="btn btn-wishlist btn-wishlist-{{ event.id }} btn-wishlist-rem"><i class="fa fa-heart fa-2x"></i></a></div></div>
+                                                            {% else %}
+                                                                <div class="pos-abs" style="right: 24px;top: 110px;"><div><a data-rep='{{ event.id }}' class="btn btn-wishlist btn-wishlist-{{ event.id }} btn-wishlist-add"><i class="fa fa-heart-o fa-2x"></i></a></div></div>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <div class="pos-abs" style="right: 24px;top: 110px;"><div><a data-rep='{{ event.id }}' class="btn btn-wishlist btn-wishlist-{{ event.id }} btn-wishlist-add"><i class="fa fa-heart-o fa-2x"></i></a></div></div>
+                                                {% endif %}
+                                                <div class="pos-abs" style="right: 24px;top: 110px;"><div><a data-rep='{{ event.id }}' class="btn btn-wishlist btn-wishlist-{{ event.id }} btn-wishlist-add"><i class="fa fa-heart-o fa-2x"></i></a></div></div>
+                                            {% else %}
+                                                <div class="pos-abs" style="right: 24px;top: 110px;"><div><a data-rep='nill' class="btn btn-wishlist"><i class="fa fa-heart-o fa-2x"></i></a></div></div>
+                                            {% endif %}
+                                            <div class="pos-abs" style="right: 24px;top: 140px;"><div><a data-rep='{{ event.id }}' class="btn btn-cart"><i class="fa fa-shopping-cart fa-2x"></i></a></div></div>
+                                    </div>
+                                </div>
+                                <h4 class="card-title"><a class="event-title" href="{{ url_for('event', event_id=event.id) }}">{{ event.title }}</a></h4>
+                                <div class="card-rate-div">
+                                    <span class="card-event-rate">${{ event.price }}</span><span class="card-event-rate-person">/person</span>
+                                </div>
+                            </div>
+                            <div class="">
+                                <p class="card-review">Reviews: <span class="card-review-count">0</span></p>
+                                <div class="card-event-star-rating">
+                                    <i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star-half-o card-event-star" aria-hidden="true"></i><i class="fa fa-star-o card-event-star" aria-hidden="true"></i>
+                                </div>
+                                <div class="card-event-days">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i><span>{{ event.days }} day(s)</span>
+                                </div>
+                                <div class="card-event-location">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i><span> {{ event.location }}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+          </div>
+          <div class="carousel-item carousel-card">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for event in events_s2 %}
+                    <div class="col-3 {% if loop.index0==0 %} offset-2-edited {% endif %}">
+                        <div class="card h-100 event-card">
+                        <a href="{{ url_for('event', event_id=event.id) }}">
+                            <img src="{{ url_for('static', filename='event_pics/' + event.image1) }}" class="card-img-top" alt="">
+                        </a>
+                        <div class="card-body">
+                            <div class="pos-rel">
+                                <div class="card-percentage-outer-div pos-abs">
+                                    <div class="pos-rel">
+                                            <div class="pos-abs card-percentage-inner-div"><div class="card-percentage-div"><p class="card-event-percentage">0%</p><p class="card-event-percentage-booked">booked</p></div></div>
+                                            <div class="pos-abs" style="right: 0;top: 30px;"><div><a class="btn btn-outline-danger btn-booking">Book Now</a></div></div>
+                                            <div class="pos-abs" style="right: 24px;top: 110px;"><div><a class="btn btn-wishlist"><i class="fa fa-heart-o fa-2x"></i></a></div></div>
+                                            <div class="pos-abs" style="right: 24px;top: 140px;"><div><a class="btn btn-cart"><i class="fa fa-shopping-cart fa-2x"></i></a></div></div>
+                                    </div>
+                                </div>
+                                <h4 class="card-title"><a class="event-title" href="{{ url_for('event', event_id=event.id) }}">{{ event.title }}</a></h4>
+                                <div class="card-rate-div">
+                                    <span class="card-event-rate">${{ event.price }}</span><span class="card-event-rate-person">/person</span>
+                                </div>
+                            </div>
+                            <div class="">
+                                <p class="card-review">Reviews: <span class="card-review-count">0</span></p>
+                                <div class="card-event-star-rating">
+                                    <i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star-half-o card-event-star" aria-hidden="true"></i><i class="fa fa-star-o card-event-star" aria-hidden="true"></i>
+                                </div>
+                                <div class="card-event-days">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i><span>{{ event.days }} day(s)</span>
+                                </div>
+                                <div class="card-event-location">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i><span> {{ event.location }}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselOffersControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselOffersControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+<div>
+
+
+
+<!--======================= featured events =====================-->
+
+<br>
+
+
+<div class="row">
+    <div class="col">
+        <div class="">
+            <h3 style="font-weight: bold;margin-left: 12%;">Featured Events</h3>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div id="carouselFeaturedControls" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="false">
+        <div class="carousel-inner clg">
+          <div class="carousel-item active carousel-card">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for event in events_s2 %}
+                    <div class="col-3 {% if loop.index0==0 %} offset-2-edited {% endif %}">
+                        <div class="card h-100 event-card">
+                        <a href="{{ url_for('event', event_id=event.id) }}">
+                            <img src="{{ url_for('static', filename='event_pics/' + event.image1) }}" class="card-img-top" alt="">
+                        </a>
+                        <div class="card-body">
+                            <div class="pos-rel">
+                                <div class="card-percentage-outer-div pos-abs">
+                                    <div class="pos-rel">
+                                            <div class="pos-abs card-percentage-inner-div"><div class="card-percentage-div"><p class="card-event-percentage">0%</p><p class="card-event-percentage-booked">booked</p></div></div>
+                                            <div class="pos-abs" style="right: 0;top: 30px;"><div><a class="btn btn-outline-danger btn-booking">Book Now</a></div></div>
+                                            <div class="pos-abs" style="right: 24px;top: 110px;"><div><a class="btn btn-wishlist"><i class="fa fa-heart-o fa-2x"></i></a></div></div>
+                                            <div class="pos-abs" style="right: 24px;top: 140px;"><div><a class="btn btn-cart"><i class="fa fa-shopping-cart fa-2x"></i></a></div></div>
+                                    </div>
+                                </div>
+                                <h4 class="card-title"><a class="event-title" href="{{ url_for('event', event_id=event.id) }}">{{ event.title }}</a></h4>
+                                <div class="card-rate-div">
+                                    <span class="card-event-rate">${{ event.price }}</span><span class="card-event-rate-person">/person</span>
+                                </div>
+                            </div>
+                            <div class="">
+                                <p class="card-review">Reviews: <span class="card-review-count">0</span></p>
+                                <div class="card-event-star-rating">
+                                    <i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star-half-o card-event-star" aria-hidden="true"></i><i class="fa fa-star-o card-event-star" aria-hidden="true"></i>
+                                </div>
+                                <div class="card-event-days">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i><span>{{ event.days }} day(s)</span>
+                                </div>
+                                <div class="card-event-location">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i><span> {{ event.location }}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+          </div>
+          <div class="carousel-item carousel-card">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for event in events_s1 %}
+                    <div class="col-3 {% if loop.index0==0 %} offset-2-edited {% endif %}">
+                        <div class="card h-100 event-card">
+                        <a href="{{ url_for('event', event_id=event.id) }}">
+                            <img src="{{ url_for('static', filename='event_pics/' + event.image1) }}" class="card-img-top" alt="">
+                        </a>
+                        <div class="card-body">
+                            <div class="pos-rel">
+                                <div class="card-percentage-outer-div pos-abs">
+                                    <div class="pos-rel">
+                                            <div class="pos-abs card-percentage-inner-div"><div class="card-percentage-div"><p class="card-event-percentage">0%</p><p class="card-event-percentage-booked">booked</p></div></div>
+                                            <div class="pos-abs" style="right: 0;top: 30px;"><div><a class="btn btn-outline-danger btn-booking">Book Now</a></div></div>
+                                            <div class="pos-abs" style="right: 24px;top: 110px;"><div><a class="btn btn-wishlist"><i class="fa fa-heart-o fa-2x"></i></a></div></div>
+                                            <div class="pos-abs" style="right: 24px;top: 140px;"><div><a class="btn btn-cart"><i class="fa fa-shopping-cart fa-2x"></i></a></div></div>
+                                    </div>
+                                </div>
+                                <h4 class="card-title"><a class="event-title" href="{{ url_for('event', event_id=event.id) }}">{{ event.title }}</a></h4>
+                                <div class="card-rate-div">
+                                    <span class="card-event-rate">${{ event.price }}</span><span class="card-event-rate-person">/person</span>
+                                </div>
+                            </div>
+                            <div class="">
+                                <p class="card-review">Reviews: <span class="card-review-count">0</span></p>
+                                <div class="card-event-star-rating">
+                                    <i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star-half-o card-event-star" aria-hidden="true"></i><i class="fa fa-star-o card-event-star" aria-hidden="true"></i>
+                                </div>
+                                <div class="card-event-days">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i><span>{{ event.days }} day(s)</span>
+                                </div>
+                                <div class="card-event-location">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i><span> {{ event.location }}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselFeaturedControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselFeaturedControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+<div>
+
+
+    <!--======================= Trending events =====================-->
+
+<br>
+
+
+<div class="row">
+    <div class="col">
+        <div class="">
+            <h3 style="font-weight: bold;margin-left: 12%;">Trending Events</h3>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div id="carouselTrendingControls" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="false">
+        <div class="carousel-inner clg">
+          <div class="carousel-item active carousel-card">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for event in events_s1 %}
+                    <div class="col-3 {% if loop.index0==0 %} offset-2-edited {% endif %}">
+                        <div class="card h-100 event-card">
+                        <a href="{{ url_for('event', event_id=event.id) }}">
+                            <img src="{{ url_for('static', filename='event_pics/' + event.image1) }}" class="card-img-top" alt="">
+                        </a>
+                        <div class="card-body">
+                            <div class="pos-rel">
+                                <div class="card-percentage-outer-div pos-abs">
+                                    <div class="pos-rel">
+                                            <div class="pos-abs card-percentage-inner-div"><div class="card-percentage-div"><p class="card-event-percentage">0%</p><p class="card-event-percentage-booked">booked</p></div></div>
+                                            <div class="pos-abs" style="right: 0;top: 30px;"><div><a class="btn btn-outline-danger btn-booking">Book Now</a></div></div>
+                                            <div class="pos-abs" style="right: 24px;top: 110px;"><div><a class="btn btn-wishlist"><i class="fa fa-heart-o fa-2x"></i></a></div></div>
+                                            <div class="pos-abs" style="right: 24px;top: 140px;"><div><a class="btn btn-cart"><i class="fa fa-shopping-cart fa-2x"></i></a></div></div>
+                                    </div>
+                                </div>
+                                <h4 class="card-title"><a class="event-title" href="{{ url_for('event', event_id=event.id) }}">{{ event.title }}</a></h4>
+                                <div class="card-rate-div">
+                                    <span class="card-event-rate">${{ event.price }}</span><span class="card-event-rate-person">/person</span>
+                                </div>
+                            </div>
+                            <div class="">
+                                <p class="card-review">Reviews: <span class="card-review-count">0</span></p>
+                                <div class="card-event-star-rating">
+                                    <i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star-half-o card-event-star" aria-hidden="true"></i><i class="fa fa-star-o card-event-star" aria-hidden="true"></i>
+                                </div>
+                                <div class="card-event-days">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i><span>{{ event.days }} day(s)</span>
+                                </div>
+                                <div class="card-event-location">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i><span> {{ event.location }}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+          </div>
+          <div class="carousel-item carousel-card">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for event in events_s2 %}
+                    <div class="col-3 {% if loop.index0==0 %} offset-2-edited {% endif %}">
+                        <div class="card h-100 event-card">
+                        <a href="{{ url_for('event', event_id=event.id) }}">
+                            <img src="{{ url_for('static', filename='event_pics/' + event.image1) }}" class="card-img-top" alt="">
+                        </a>
+                        <div class="card-body">
+                            <div class="pos-rel">
+                                <div class="card-percentage-outer-div pos-abs">
+                                    <div class="pos-rel">
+                                            <div class="pos-abs card-percentage-inner-div"><div class="card-percentage-div"><p class="card-event-percentage">0%</p><p class="card-event-percentage-booked">booked</p></div></div>
+                                            <div class="pos-abs" style="right: 0;top: 30px;"><div><a class="btn btn-outline-danger btn-booking">Book Now</a></div></div>
+                                            <div class="pos-abs" style="right: 24px;top: 110px;"><div><a class="btn btn-wishlist"><i class="fa fa-heart-o fa-2x"></i></a></div></div>
+                                            <div class="pos-abs" style="right: 24px;top: 140px;"><div><a class="btn btn-cart"><i class="fa fa-shopping-cart fa-2x"></i></a></div></div>
+                                    </div>
+                                </div>
+                                <h4 class="card-title"><a class="event-title" href="{{ url_for('event', event_id=event.id) }}">{{ event.title }}</a></h4>
+                                <div class="card-rate-div">
+                                    <span class="card-event-rate">${{ event.price }}</span><span class="card-event-rate-person">/person</span>
+                                </div>
+                            </div>
+                            <div class="">
+                                <p class="card-review">Reviews: <span class="card-review-count">0</span></p>
+                                <div class="card-event-star-rating">
+                                    <i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star-half-o card-event-star" aria-hidden="true"></i><i class="fa fa-star-o card-event-star" aria-hidden="true"></i>
+                                </div>
+                                <div class="card-event-days">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i><span>{{ event.days }} day(s)</span>
+                                </div>
+                                <div class="card-event-location">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i><span> {{ event.location }}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselTrendingControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselTrendingControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+<div>
+<br>
+<br>
+<!--=================== Carousel End ===================-->
+<div class="container-find-events">
+    <div class="container">
+        <div class="row">
+            <h3 class="find-events-heading">Find Events</h3>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="card card-find-events">
+                    <img src="{{ url_for('static', filename='event_pics/cycling.jpg') }}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <div class="div-btn-card-find-events">
+                            <a href="{{ url_for('cycling') }}" class="btn btn-dark">Cycling Events</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="card card-find-events">
+                    <img src="{{ url_for('static', filename='event_pics/swimming.jpg') }}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <div class="div-btn-card-find-events">
+                            <a href="{{ url_for('swimming') }}" class="btn btn-dark">Swimming Events</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="card card-find-events">
+                    <img src="{{ url_for('static', filename='event_pics/music.jpg') }}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <div class="div-btn-card-find-events">
+                            <a href="{{ url_for('music') }}" class="btn btn-dark">Music Events</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="card card-find-events">
+                    <img src="{{ url_for('static', filename='event_pics/trip.jpg') }}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <div class="div-btn-card-find-events">
+                            <a href="{{ url_for('trip') }}" class="btn btn-dark">Trip Events</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<!--=================== Coming Soon Carousel =====================-->
+
+<div class="row">
+    <div class="col">
+        <div class="">
+            <h3 style="font-weight: bold;margin-left: 12%;">Coming Soon</h3>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div id="carouselComingControls" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="false">
+        <div class="carousel-inner clg">
+          <div class="carousel-item active carousel-card">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for event in events_s1 %}
+                    <div class="col-3 {% if loop.index0==0 %} offset-2-edited {% endif %}">
+                        <div class="card h-100 event-card">
+                        <a href="{{ url_for('event', event_id=event.id) }}">
+                            <img src="{{ url_for('static', filename='event_pics/' + event.image1) }}" class="card-img-top" alt="">
+                        </a>
+                        <div class="card-body">
+                            <div class="pos-rel">
+                                <div class="card-percentage-outer-div pos-abs">
+                                    <div class="pos-rel">
+                                            <div class="pos-abs card-percentage-inner-div"><div class="card-percentage-div"><p class="card-event-percentage">0%</p><p class="card-event-percentage-booked">booked</p></div></div>
+                                            <div class="pos-abs" style="right: 0;top: 30px;"><div><a class="btn btn-outline-danger btn-booking">Book Now</a></div></div>
+                                            <div class="pos-abs" style="right: 24px;top: 110px;"><div><a class="btn btn-wishlist"><i class="fa fa-heart-o fa-2x"></i></a></div></div>
+                                            <div class="pos-abs" style="right: 24px;top: 140px;"><div><a class="btn btn-cart"><i class="fa fa-shopping-cart fa-2x"></i></a></div></div>
+                                    </div>
+                                </div>
+                                <h4 class="card-title"><a class="event-title" href="{{ url_for('event', event_id=event.id) }}">{{ event.title }}</a></h4>
+                                <div class="card-rate-div">
+                                    <span class="card-event-rate">${{ event.price }}</span><span class="card-event-rate-person">/person</span>
+                                </div>
+                            </div>
+                            <div class="">
+                                <p class="card-review">Reviews: <span class="card-review-count">0</span></p>
+                                <div class="card-event-star-rating">
+                                    <i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star-half-o card-event-star" aria-hidden="true"></i><i class="fa fa-star-o card-event-star" aria-hidden="true"></i>
+                                </div>
+                                <div class="card-event-days">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i><span>{{ event.days }} day(s)</span>
+                                </div>
+                                <div class="card-event-location">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i><span> {{ event.location }}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-footer card-coming-soon-footer">
+                            <h4 class="coming-soon">3 Days Remaining</h4>
+                        </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+          </div>
+          <div class="carousel-item carousel-card">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for event in events_s2 %}
+                    <div class="col-3 {% if loop.index0==0 %} offset-2-edited {% endif %}">
+                        <div class="card h-100 event-card">
+                        <a href="{{ url_for('event', event_id=event.id) }}">
+                            <img src="{{ url_for('static', filename='event_pics/' + event.image1) }}" class="card-img-top" alt="">
+                        </a>
+                        <div class="card-body">
+                            <div class="pos-rel">
+                                <div class="card-percentage-outer-div pos-abs">
+                                    <div class="pos-rel">
+                                            <div class="pos-abs card-percentage-inner-div"><div class="card-percentage-div"><p class="card-event-percentage">0%</p><p class="card-event-percentage-booked">booked</p></div></div>
+                                            <div class="pos-abs" style="right: 0;top: 30px;"><div><a class="btn btn-outline-danger btn-booking">Book Now</a></div></div>
+                                            <div class="pos-abs" style="right: 24px;top: 110px;"><div><a class="btn btn-wishlist"><i class="fa fa-heart-o fa-2x"></i></a></div></div>
+                                            <div class="pos-abs" style="right: 24px;top: 140px;"><div><a class="btn btn-cart"><i class="fa fa-shopping-cart fa-2x"></i></a></div></div>
+                                    </div>
+                                </div>
+                                <h4 class="card-title"><a class="event-title" href="{{ url_for('event', event_id=event.id) }}">{{ event.title }}</a></h4>
+                                <div class="card-rate-div">
+                                    <span class="card-event-rate">${{ event.price }}</span><span class="card-event-rate-person">/person</span>
+                                </div>
+                            </div>
+                            <div class="">
+                                <p class="card-review">Reviews: <span class="card-review-count">0</span></p>
+                                <div class="card-event-star-rating">
+                                    <i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star-half-o card-event-star" aria-hidden="true"></i><i class="fa fa-star-o card-event-star" aria-hidden="true"></i>
+                                </div>
+                                <div class="card-event-days">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i><span>{{ event.days }} day(s)</span>
+                                </div>
+                                <div class="card-event-location">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i><span> {{ event.location }}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-footer card-coming-soon-footer">
+                            <h4 class="coming-soon">3 Days Remaining</h4>
+                        </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselComingControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselComingControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+<div>
+    <br>
+    <br>
+    <!--=================== Coming Soon Carousel END =====================-->
+
+{% endblock content %}

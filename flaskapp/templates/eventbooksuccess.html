@@ -1,0 +1,155 @@
+{% extends "layout.html" %}
+{% block content %}
+<script>
+    $(document).ready(function() {
+        $('body').addClass('no-footer');
+        $('body').css({"background-color":"#2b2b2b"})
+        $('footer').remove();
+    });
+</script>
+
+
+<div class="container" style="border: 1px solid black;margin-top: 20px;border-radius: 10px;margin-bottom: 40px;">
+    <div class="row" style="margin-top: 0px;margin-bottom: 0px;background: #f6f6f6;padding-top: 10px;padding-bottom: 5px;border-top-right-radius: 10px;border-top-left-radius: 10px;">
+        <div class="col-12">
+            <div style="text-align: center;" >
+                <h2>Event Booked Successfully</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row" style='background-color: #fff;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;padding-top: 25px;padding-bottom: 25px;'>
+        <div class="col-12">
+            <div class="row">
+                <div class="col">
+                    <div style="text-align: center;">
+                        <p style="font-weight: bold;">You might also be interested in</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div id="carouselOffersControls" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="false">
+                    <div class="carousel-inner clg">
+                      <div class="carousel-item active carousel-card">
+                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                            {% for event in events_s1 %}
+                                <div class="col-3 {% if loop.index0==0 %} offset-2-edited {% endif %}">
+                                    <div class="card h-100 event-card">
+                                    <a href="{{ url_for('event', event_id=event.id) }}">
+                                        <img src="{{ url_for('static', filename='event_pics/' + event.image1) }}" class="card-img-top" alt="" style="height: 200px;">
+                                    </a>
+                                    <div class="card-body">
+                                        <div class="pos-rel">
+                                            <div class="card-percentage-outer-div pos-abs">
+                                                <div class="pos-rel">
+                                                        <div class="pos-abs card-percentage-inner-div"><div class="card-percentage-div"><p class="card-event-percentage">0%</p><p class="card-event-percentage-booked">booked</p></div></div>
+                                                        <div class="pos-abs" style="right: 0;top: 30px;"><div><a data-rep='{{ event.id }}' class="btn btn-outline-danger btn-booking">Book Now</a></div></div>
+                                                        {% if current_user.is_authenticated %}
+                                                            {% if current_user.wishlist_user %}
+                                                                {% set user_wishlist = current_user.wishlist_user %}
+                                                                {% set event_wishlist = event.event_wishlist %}
+                                                                {% for itemu in user_wishlist %}
+                                                                    {% for iteme in event_wishlist %}
+                                                                        {% if iteme.id == itemu.id %}
+                                                                            <div class="pos-abs" style="right: 24px;top: 110px;"><div><a data-rep='{{ event.id }}' class="btn btn-wishlist btn-wishlist-{{ event.id }} btn-wishlist-rem"><i class="fa fa-heart fa-2x"></i></a></div></div>
+                                                                        {% else %}
+                                                                            <div class="pos-abs" style="right: 24px;top: 110px;"><div><a data-rep='{{ event.id }}' class="btn btn-wishlist btn-wishlist-{{ event.id }} btn-wishlist-add"><i class="fa fa-heart-o fa-2x"></i></a></div></div>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                {% endfor %}
+                                                            {% else %}
+                                                                <div class="pos-abs" style="right: 24px;top: 110px;"><div><a data-rep='{{ event.id }}' class="btn btn-wishlist btn-wishlist-{{ event.id }} btn-wishlist-add"><i class="fa fa-heart-o fa-2x"></i></a></div></div>
+                                                            {% endif %}
+                                                        {% else %}
+                                                            <div class="pos-abs" style="right: 24px;top: 110px;"><div><a data-rep='nill' class="btn btn-wishlist"><i class="fa fa-heart-o fa-2x"></i></a></div></div>
+                                                        {% endif %}
+                                                        <div class="pos-abs" style="right: 24px;top: 140px;"><div><a data-rep='{{ event.id }}' class="btn btn-cart"><i class="fa fa-shopping-cart fa-2x"></i></a></div></div>
+                                                </div>
+                                            </div>
+                                            <p class="card-title"><a class="event-title" href="{{ url_for('event', event_id=event.id) }}">{{ event.title }}</a></p>
+                                            <div class="card-rate-div">
+                                                <span class="card-event-rate">${{ event.price }}</span><span class="card-event-rate-person">/person</span>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <p class="card-review">Reviews: <span class="card-review-count">0</span></p>
+                                            <div class="card-event-star-rating">
+                                                <i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star-half-o card-event-star" aria-hidden="true"></i><i class="fa fa-star-o card-event-star" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="card-event-days">
+                                                <i class="fa fa-clock-o" aria-hidden="true"></i><span>{{ event.days }} day(s)</span>
+                                            </div>
+                                            <div class="card-event-location">
+                                                <i class="fa fa-map-marker" aria-hidden="true"></i><span> {{ event.location }}</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            </div>
+                      </div>
+                      <div class="carousel-item carousel-card">
+                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                            {% for event in events_s2 %}
+                                <div class="col-3 {% if loop.index0==0 %} offset-2-edited {% endif %}">
+                                    <div class="card h-100 event-card">
+                                    <a href="{{ url_for('event', event_id=event.id) }}">
+                                        <img src="{{ url_for('static', filename='event_pics/' + event.image1) }}" class="card-img-top" alt="" style="height: 200px;">
+                                    </a>
+                                    <div class="card-body">
+                                        <div class="pos-rel">
+                                            <div class="card-percentage-outer-div pos-abs">
+                                                <div class="pos-rel">
+                                                        <div class="pos-abs card-percentage-inner-div"><div class="card-percentage-div"><p class="card-event-percentage">0%</p><p class="card-event-percentage-booked">booked</p></div></div>
+                                                        <div class="pos-abs" style="right: 0;top: 30px;"><div><a class="btn btn-outline-danger btn-booking">Book Now</a></div></div>
+                                                        <div class="pos-abs" style="right: 24px;top: 110px;"><div><a class="btn btn-wishlist"><i class="fa fa-heart-o fa-2x"></i></a></div></div>
+                                                        <div class="pos-abs" style="right: 24px;top: 140px;"><div><a class="btn btn-cart"><i class="fa fa-shopping-cart fa-2x"></i></a></div></div>
+                                                </div>
+                                            </div>
+                                            <p class="card-title"><a class="event-title" href="{{ url_for('event', event_id=event.id) }}">{{ event.title }}</a></p>
+                                            <div class="card-rate-div">
+                                                <span class="card-event-rate">${{ event.price }}</span><span class="card-event-rate-person">/person</span>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <p class="card-review">Reviews: <span class="card-review-count">0</span></p>
+                                            <div class="card-event-star-rating">
+                                                <i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star card-event-star" aria-hidden="true"></i><i class="fa fa-star-half-o card-event-star" aria-hidden="true"></i><i class="fa fa-star-o card-event-star" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="card-event-days">
+                                                <i class="fa fa-clock-o" aria-hidden="true"></i><span>{{ event.days }} day(s)</span>
+                                            </div>
+                                            <div class="card-event-location">
+                                                <i class="fa fa-map-marker" aria-hidden="true"></i><span> {{ event.location }}</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            </div>
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselOffersControls" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselOffersControls" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            <div>
+        </div>
+    </div>
+    <div class="row" style='background-color: #fff;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;'>
+        <div class="col-12">
+            <div style="text-align: center;">
+                <a href="{{ url_for('home') }}" class="btn btn-danger">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,735 @@
+{% extends "dashboardlayout.html" %}
+{% block content %}
+
+<div class="row">
+
+    <h3 class="mb-2">Create New Event<span style="font-size: 14px;"> ( * fields are required)</span></h3>
+    <div class="col-12 col-lg-6">
+        <div class="content-section">
+            <form id="offer-form" method="POST" action="" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+
+                    <div class="form-floating">
+                        {% if form.title.errors %}
+                            {{ form.title(class="form-control form-control-md is-invalid", id="floatingInputTitle", placeholder="Title") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.title.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.title(class="form-control form-control-md mb-2", id="floatingInputTitle", placeholder="Title") }}
+                        {% endif %}
+                        <label for="floatingInputTitle">*Title</label>
+                    </div>
+
+                    <div class="form-floating">
+                        {% if form.description.errors %}
+                            {{ form.description(class="form-control form-control-md is-invalid", id="floatingInputDescription", placeholder="Description") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.description.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.description(class="form-control form-control-md mb-2", id="floatingInputDescription", placeholder="Description") }}
+                        {% endif %}
+                        <label for="floatingInputDescription">*Description</label>
+                    </div>
+
+                    <div class="row g-3 align-items-center">
+                        <div class="col-6">
+                            <div class="form-floating">
+                                {% if form.date.errors %}
+                                    {{ form.date(type="date", class="form-control form-control-md is-invalid mb-2",  id="floatingInputDate") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.date.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.date(type="date", class="form-control form-control-md mb-2",  id="floatingInputDate") }}
+                                {% endif %}
+                                <label for="floatingInputDate">*Start Date</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating">
+                                {% if form.date_end.errors %}
+                                    {{ form.date_end(type="date", class="form-control form-control-md is-invalid mb-2",  id="floatingInputDate") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.date_end.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.date_end(type="date", class="form-control form-control-md mb-2",  id="floatingInputDate") }}
+                                {% endif %}
+                                <label for="floatingInputDate">End Date</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 align-items-center">
+                        <div class="col-6">
+                            <div class="form-floating">
+                                {% if form.time.errors %}
+                                    {{ form.time(type="time", class="form-control form-control-md is-invalid mb-2",  id="floatingInputDate") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.time.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.time(type="time", class="form-control form-control-md mb-2",  id="floatingInputTime") }}
+                                {% endif %}
+                                <label for="floatingInputTime">*Start Time</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating">
+                                {% if form.time_end.errors %}
+                                    {{ form.time_end(type="time", class="form-control form-control-md is-invalid mb-2",  id="floatingInputDate") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.time_end.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.time_end(type="time", class="form-control form-control-md mb-2",  id="floatingInputTime") }}
+                                {% endif %}
+                                <label for="floatingInputTime">End Time</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-floating">
+                        {% if form.price.errors %}
+                            {{ form.price(class="form-control form-control-md mb-2 is-invalid", placeholder="*Pricing", id="floatingInputPricing") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.price.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.price(class="form-control form-control-md mb-2", placeholder="*Pricing", id="floatingInputPricing") }}
+                        {% endif %}
+                        <label for="floatingInputPricing">*Pricing</label>
+                    </div>
+
+                    <div class="form-floating">
+                        {% if form.location.errors %}
+                            {{ form.location(class="form-control form-control-md mb-2 is-invalid", placeholder="*Location", id="floatingInputLocation") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.location.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.location(class="form-control form-control-md mb-2", placeholder="*Location", id="floatingInputLocation") }}
+                        {% endif %}
+                        <label for="floatingInputLocation">*Location</label>
+                    </div>
+                    <div class="row g-3 align-items-center">
+                        <div class="col-6">
+                            <div class="form-floating">
+                                {% if form.days.errors %}
+                                    {{ form.days(class="form-control form-control-md mb-2 is-invalid", placeholder="*Days", id="floatingInputDays") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.days.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.days(class="form-control form-control-md mb-2", placeholder="*Days", id="floatingInputDays") }}
+                                {% endif %}
+                                <label for="floatingInputDays">*Days</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating">
+                                {% if form.pre_knowledge.errors %}
+                                    {{ form.pre_knowledge(class="form-select mb-2 is-invalid", placeholder="*Required Knowledge", id="floatingInputKnowledge" )}}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.pre_knowledge.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.pre_knowledge(class="form-select mb-2", placeholder="*Required Knowledge", id="floatingInputKnowledge" )}}
+                                {% endif %}
+                                <label for="floatingInputKnowledge">*Knowledge Criteria</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-4" style="text-align: center;">
+                            <label for="" style="padding: 16px;">Repeats Every</label>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating">
+                                {% if form.repeat_times.errors %}
+                                    {{ form.repeat_times(class="form-control form-control-md", id="floatingInputRepeatTimes", placeholder="Frequency") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.repeat_times.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.repeat_times(class="form-control form-control-md", id="floatingInputRepeatTimes", placeholder="Frequency") }}
+                                {% endif %}
+                                <label for="floatingInputRepeatTimes">Frequency</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating">
+                                {% if form.repeat_recurrence.errors %}
+                                    {{ form.repeat_recurrence(class="form-select", id="floatingInputRepeatRecurrence") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.repeat_recurrence.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.repeat_recurrence(class="form-select", id="floatingInputRepeatRecurrence") }}
+                                {% endif %}
+                                <label for="floatingInputRepeatRecurrence">Recurrence</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-floating">
+                        {% if form.tags.errors %}
+                            {{ form.tags(class="form-select mb-2 tags", id="floatingInputTags") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.tags.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.tags(class="form-select mb-2 tags", id="floatingInputTags") }}
+                        {% endif %}
+                        <label for="floatingInputTags">*Tags</label>
+                    </div>
+
+                    <div class="row g-3 align-items-center">
+                        <div class="col-6">
+                            <div class="form-floating">
+                                {% if form.schedule.errors %}
+                                    {{ form.schedule(class="form-control form-control-md mb-2 is-invalid", placeholder="Schedule",id="floatingInputSchedule") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.schedule.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.schedule(class="form-control form-control-md mb-2", placeholder="Schedule",id="floatingInputSchedule") }}
+                                {% endif %}
+                                <label for="floatingInputSchedule">Schedule</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating">
+                                {% if form.direction.errors %}
+                                    {{ form.direction(class="form-control form-control-md mb-2 is-invalid", placeholder="Directions", id="floatingInputDirections") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.direction.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.direction(class="form-control form-control-md mb-2", placeholder="Directions", id="floatingInputDirections") }}
+                                {% endif %}
+                                <label for="floatingInputDirections">Directions</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-floating">
+                        {% if form.equipment.errors %}
+                            {{ form.equipment(class="form-control form-control-md mb-2 is-invalid", placeholder="Equipment", id="floatingInputEquipment") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.equipment.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.equipment(class="form-control form-control-md mb-2", placeholder="Equipment", id="floatingInputEquipment") }}
+                        {% endif %}
+                        <label for="floatingInputEquipment">Equipment</label>
+                    </div>
+                    <div class="form-floating">
+                        {% if form.min_tickets.errors %}
+                            {{ form.min_tickets(class="form-control form-control-md mb-2 is-invalid", placeholder="Minimum Tickets", id="floatingInputMinTickets") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.min_tickets.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.min_tickets(class="form-control form-control-md mb-2", placeholder="Minimum Tickets", id="floatingInputMinTickets") }}
+                        {% endif %}
+                        <label for="floatingInputMinTickets">Minimum No. Of Tickets</label>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-check">
+                                    {{ form.offers_bool(class="form-check-input", id="offersBool", autocomplete="off") }}
+                                    {{ form.offers_bool.label(class="form-check-label") }}
+                                </div>
+                            </div>
+                            <div class="offset-5 col-1" style="padding-left: 0px;">
+                                <p id="add" class="btn btn-add" style="padding: 3px 8px 3px 8px;"><i class="bi bi-plus-lg"></i></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 align-items-center" id="offerForm1">
+                        <div class="col-5">
+                            <div class="form-floating">
+                                {% if form.attendee1.errors %}
+                                    {{ form.attendee1(class="form-control form-control-md mb-2 is-invalid", placeholder="Schedule",id="floatingInputAttendee1") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.attendee1.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.attendee1(class="form-control form-control-md mb-2", placeholder="Schedule",id="floatingInputAttendee1") }}
+                                {% endif %}
+                                <label for="floatingInputAttendee1">Attendee Amount</label>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-floating">
+                                {% if form.discount1.errors %}
+                                    {{ form.discount1(class="form-control form-control-md mb-2 is-invalid", placeholder="Directions", id="floatingInputDiscount1") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.discount1.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.discount1(class="form-control form-control-md mb-2", placeholder="Directions", id="floatingInputDiscount1") }}
+                                {% endif %}
+                                <label for="floatingInputDiscount">Discount</label>
+                            </div>
+                        </div>
+                        <div class="col-2" style="padding: 0px;">
+                            <p class="remove btn btn-remove" style="padding: 6px 8px 6px 8px;" id='offer-remove-1'><i class="bi bi-trash"></i></p>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 align-items-center" id="offerForm2">
+                        <div class="col-5">
+                            <div class="form-floating">
+                                {% if form.attendee2.errors %}
+                                    {{ form.attendee2(class="form-control form-control-md mb-2 is-invalid", placeholder="Schedule",id="floatingInputAttendee2") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.attendee2.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.attendee2(class="form-control form-control-md mb-2", placeholder="Schedule",id="floatingInputAttendee2") }}
+                                {% endif %}
+                                <label for="floatingInputAttendee1">Attendee Amount</label>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-floating">
+                                {% if form.discount2.errors %}
+                                    {{ form.discount2(class="form-control form-control-md mb-2 is-invalid", placeholder="Directions", id="floatingInputDiscount2") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.discount2.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.discount2(class="form-control form-control-md mb-2", placeholder="Directions", id="floatingInputDiscount2") }}
+                                {% endif %}
+                                <label for="floatingInputDiscount">Discount</label>
+                            </div>
+                        </div>
+                        <div class="col-2" style="padding: 0px;">
+                            <p class="remove btn btn-remove" style="padding: 6px 8px 6px 8px;" id='offer-remove-2'><i class="bi bi-trash"></i></p>
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center" id="offerForm3">
+                        <div class="col-5">
+                            <div class="form-floating">
+                                {% if form.attendee3.errors %}
+                                    {{ form.attendee3(class="form-control form-control-md mb-2 is-invalid", placeholder="Schedule",id="floatingInputAttendee3") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.attendee3.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.attendee3(class="form-control form-control-md mb-2", placeholder="Schedule",id="floatingInputAttendee3") }}
+                                {% endif %}
+                                <label for="floatingInputAttendee1">Attendee Amount</label>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-floating">
+                                {% if form.discount3.errors %}
+                                    {{ form.discount3(class="form-control form-control-md mb-2 is-invalid", placeholder="Directions", id="floatingInputDiscount3") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.discount3.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.discount3(class="form-control form-control-md mb-2", placeholder="Directions", id="floatingInputDiscount3") }}
+                                {% endif %}
+                                <label for="floatingInputDiscount">Discount</label>
+                            </div>
+                        </div>
+                        <div class="col-2" style="padding: 0px;">
+                            <p class="remove btn btn-remove" style="padding: 6px 8px 6px 8px;" id='offer-remove-3'><i class="bi bi-trash"></i></p>
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center" id="offerForm4">
+                        <div class="col-5">
+                            <div class="form-floating">
+                                {% if form.attendee4.errors %}
+                                    {{ form.attendee4(class="form-control form-control-md mb-2 is-invalid", placeholder="Schedule",id="floatingInputAttendee4") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.attendee4.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.attendee4(class="form-control form-control-md mb-2", placeholder="Schedule",id="floatingInputAttendee4") }}
+                                {% endif %}
+                                <label for="floatingInputAttendee1">Attendee Amount</label>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-floating">
+                                {% if form.discount4.errors %}
+                                    {{ form.discount4(class="form-control form-control-md mb-2 is-invalid", placeholder="Directions", id="floatingInputDiscount4") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.discount4.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.discount4(class="form-control form-control-md mb-2", placeholder="Directions", id="floatingInputDiscount4") }}
+                                {% endif %}
+                                <label for="floatingInputDiscount">Discount</label>
+                            </div>
+                        </div>
+                        <div class="col-2" style="padding: 0px;">
+                            <p class="remove btn btn-remove" style="padding: 6px 8px 6px 8px;" id='offer-remove-4'><i class="bi bi-trash"></i></p>
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center" id="offerForm5">
+                        <div class="col-5">
+                            <div class="form-floating">
+                                {% if form.attendee5.errors %}
+                                    {{ form.attendee5(class="form-control form-control-md mb-2 is-invalid", placeholder="Schedule",id="floatingInputAttendee5") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.attendee5.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.attendee5(class="form-control form-control-md mb-2", placeholder="Schedule",id="floatingInputAttendee5") }}
+                                {% endif %}
+                                <label for="floatingInputAttendee5">Attendee Amount</label>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-floating">
+                                {% if form.discount5.errors %}
+                                    {{ form.discount5(class="form-control form-control-md mb-2 is-invalid", placeholder="Directions", id="floatingInputDiscount5") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.discount5.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.discount5(class="form-control form-control-md mb-2", placeholder="Directions", id="floatingInputDiscount5") }}
+                                {% endif %}
+                                <label for="floatingInputDiscount5">Discount</label>
+                            </div>
+                        </div>
+                        <div class="col-2" style="padding: 0px;">
+                            <p class="remove btn btn-remove" style="padding: 6px 8px 6px 8px;" id='offer-remove-5'><i class="bi bi-trash"></i></p>
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center" id="offerForm6">
+                        <div class="col-5">
+                            <div class="form-floating">
+                                {% if form.attendee6.errors %}
+                                    {{ form.attendee6(class="form-control form-control-md mb-2 is-invalid", placeholder="Schedule",id="floatingInputAttendee6") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.attendee6.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.attendee6(class="form-control form-control-md mb-2", placeholder="Schedule",id="floatingInputAttendee6") }}
+                                {% endif %}
+                                <label for="floatingInputAttendee6">Attendee Amount</label>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-floating">
+                                {% if form.discount6.errors %}
+                                    {{ form.discount6(class="form-control form-control-md mb-2 is-invalid", placeholder="Directions", id="floatingInputDiscount6") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.discount6.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.discount6(class="form-control form-control-md mb-2", placeholder="Directions", id="floatingInputDiscount6") }}
+                                {% endif %}
+                                <label for="floatingInputDiscount6">Discount</label>
+                            </div>
+                        </div>
+                        <div class="col-2" style="padding: 0px;">
+                            <p class="remove btn btn-remove" style="padding: 6px 8px 6px 8px;" id='offer-remove-6'><i class="bi bi-trash"></i></p>
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center" id="offerForm7">
+                        <div class="col-5">
+                            <div class="form-floating">
+                                {% if form.attendee7.errors %}
+                                    {{ form.attendee7(class="form-control form-control-md mb-2 is-invalid", placeholder="Schedule",id="floatingInputAttendee7") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.attendee7.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.attendee7(class="form-control form-control-md mb-2", placeholder="Schedule",id="floatingInputAttendee7") }}
+                                {% endif %}
+                                <label for="floatingInputAttendee7">Attendee Amount</label>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-floating">
+                                {% if form.discount7.errors %}
+                                    {{ form.discount7(class="form-control form-control-md mb-2 is-invalid", placeholder="Directions", id="floatingInputDiscount7") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.discount7.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.discount7(class="form-control form-control-md mb-2", placeholder="Directions", id="floatingInputDiscount7") }}
+                                {% endif %}
+                                <label for="floatingInputDiscount7">Discount</label>
+                            </div>
+                        </div>
+                        <div class="col-2" style="padding: 0px;">
+                            <p class="remove btn btn-remove" style="padding: 6px 8px 6px 8px;" id='offer-remove-7'><i class="bi bi-trash"></i></p>
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center" id="offerForm8">
+                        <div class="col-5">
+                            <div class="form-floating">
+                                {% if form.attendee8.errors %}
+                                    {{ form.attendee8(class="form-control form-control-md mb-2 is-invalid", placeholder="Schedule",id="floatingInputAttendee8") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.attendee8.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.attendee8(class="form-control form-control-md mb-2", placeholder="Schedule",id="floatingInputAttendee8") }}
+                                {% endif %}
+                                <label for="floatingInputAttendee8">Attendee Amount</label>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-floating">
+                                {% if form.discount8.errors %}
+                                    {{ form.discount8(class="form-control form-control-md mb-2 is-invalid", placeholder="Directions", id="floatingInputDiscount8") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.discount8.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.discount8(class="form-control form-control-md mb-2", placeholder="Directions", id="floatingInputDiscount8") }}
+                                {% endif %}
+                                <label for="floatingInputDiscount8">Discount</label>
+                            </div>
+                        </div>
+                        <div class="col-2" style="padding: 0px;">
+                            <p class="remove btn btn-remove" style="padding: 6px 8px 6px 8px;" id='offer-remove-8'><i class="bi bi-trash"></i></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form.image1(class="form-control is-hidden", id="img-1", autocomplete="off") }}
+                        {% if form.image1.errors %}
+                            {% for error in form.image1.errors %}
+                                <span class="text-danger" id="error">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+
+                    </div>
+                    <div class="form-group">
+                        {{ form.image2(class="form-control is-hidden", id="img-2", autocomplete="off") }}
+                        {% if form.image2.errors %}
+                            {% for error in form.image2.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.image3(class="form-control is-hidden", id="img-3", autocomplete="off") }}
+                        {% if form.image3.errors %}
+                            {% for error in form.image3.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.image4(class="form-control is-hidden", id="img-4", autocomplete="off") }}
+                        {% if form.image4.errors %}
+                            {% for error in form.image4.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.image5(class="form-control is-hidden", id="img-5", autocomplete="off") }}
+                        {% if form.image5.errors %}
+                            {% for error in form.image5.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.image6(class="form-control is-hidden", id="img-6", autocomplete="off") }}
+                        {% if form.image6.errors %}
+                            {% for error in form.image6.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.image7(class="form-control is-hidden", id="img-7", autocomplete="off") }}
+                        {% if form.image7.errors %}
+                            {% for error in form.image7.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+
+
+                    <div class="form-check">
+                        {{ form.fee_cancel(class="form-check-input") }}
+                        {{ form.fee_cancel.label(class="form-check-label") }}
+                    </div>
+                    <div class="form-check">
+                        {{ form.prioritize(class="form-check-input") }}
+                        {{ form.prioritize.label(class="form-check-label") }}
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-danger" type="submit" id="submit">Save</button>
+                    </div>
+                </fieldset>
+
+
+            </form>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6">
+        <div class="row img-row">
+            <div class="col-6 col-lg-3" id="img-div-1">
+                <div class="img-div" id="addTrigger1" >
+                    <i class="bi bi-file-earmark-image"></i>
+                    <p class="img-text" id="img-1-txt">Featured Image</p>
+                    <p class="img-error-text img-text" style="color: red;"></p>
+                </div>
+            </div>
+                <div class="col-6 col-lg-3 pos-rel" id="img-div-2">
+                    <div class="img-div" id="addTrigger2">
+                        <i class="bi bi-file-earmark-image"></i>
+                        <p class="img-text" id="img-2-txt">Featured Image</p>
+                    </div>
+                    <div class="img-div-remove" id="img-remove-btn-2"><i class="bi bi-trash-fill"></i></div>
+                </div>
+                <div class="col-6 col-lg-3 pos-rel" id="img-div-3">
+                    <div class="img-div" id="addTrigger3">
+                        <i class="bi bi-file-earmark-image"></i>
+                        <p class="img-text" id="img-3-txt">Featured Image</p>
+                    </div>
+                    <div class="img-div-remove" id="img-remove-btn-3"><i class="bi bi-trash-fill"></i></div>
+                </div>
+                <div class="col-6 col-lg-3 pos-rel" id="img-div-4">
+                    <div class="img-div" id="addTrigger4">
+                        <i class="bi bi-file-earmark-image"></i>
+                        <p class="img-text" id="img-4-txt">Featured Image</p>
+                    </div>
+                    <div class="img-div-remove" id="img-remove-btn-4"><i class="bi bi-trash-fill"></i></div>
+                </div>
+                <div class="col-6 col-lg-3 pos-rel" id="img-div-5">
+                    <div class="img-div" id="addTrigger5">
+                        <i class="bi bi-file-earmark-image"></i>
+                        <p class="img-text" id="img-5-txt">Featured Image</p>
+                    </div>
+                    <div class="img-div-remove" id="img-remove-btn-5"><i class="bi bi-trash-fill"></i></div>
+                </div>
+                <div class="col-6 col-lg-3 pos-rel" id="img-div-6">
+                    <div class="img-div" id="addTrigger6">
+                        <i class="bi bi-file-earmark-image"></i>
+                        <p class="img-text" id="img-6-txt">Featured Image</p>
+                    </div>
+                    <div class="img-div-remove" id="img-remove-btn-6"><i class="bi bi-trash-fill"></i></div>
+                </div>
+                <div class="col-6 col-lg-3 pos-rel" id="img-div-7">
+                    <div class="img-div" id="addTrigger7">
+                        <i class="bi bi-file-earmark-image"></i>
+                        <p class="img-text" id="img-7-txt">Featured Image</p>
+                    </div>
+                    <div class="img-div-remove" id="img-remove-btn-7"><i class="bi bi-trash-fill"></i></div>
+                </div>
+            <div class="col-6 col-lg-3" id="img-add-2">
+                <div class="plus-img-div">
+                    <i class="bi bi-plus plus-icon"></i>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 is-hidden" id="img-add-3">
+                <div class="plus-img-div">
+                    <i class="bi bi-plus plus-icon"></i>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 is-hidden" id="img-add-4">
+                <div class="plus-img-div">
+                    <i class="bi bi-plus plus-icon"></i>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 is-hidden" id="img-add-5">
+                <div class="plus-img-div">
+                    <i class="bi bi-plus plus-icon"></i>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 is-hidden" id="img-add-6">
+                <div class="plus-img-div">
+                    <i class="bi bi-plus plus-icon"></i>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 is-hidden" id="img-add-7">
+                <div class="plus-img-div">
+                    <i class="bi bi-plus plus-icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

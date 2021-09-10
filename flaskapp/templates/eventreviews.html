@@ -1,0 +1,154 @@
+{% extends "dashboardlayout.html" %}
+{% block content %}
+    <h4 style="margin-top: 20px;">{{ event.title }}</h4>
+<div class="row">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        <div class="card shadow" style="width: 16rem;">
+            <div class="card-body" style="position: relative;">
+                <div style="position: absolute; right: 20px;">
+                    <p style="font-size:60px;color: #64bc36;">0%</p>
+                  </div>
+                <i class="fa fa-calendar-check-o" aria-hidden="true" style="color: #a8a8a85e;font-size: 5em;"></i>
+              <p class="card-title">Booking</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        <div class="card shadow" style="width: 16rem;">
+            <div class="card-body" style="position: relative;">
+                <div style="position: absolute; right: 20px;">
+                    <p style="font-size:60px;color: #feb311;">0</p>
+                  </div>
+                <i class="fa fa-search" aria-hidden="true" style="color: #a8a8a85e;font-size: 5em;"></i>
+              <p class="card-title">Total Views</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        <div class="card shadow" style="width: 16rem;">
+            <div class="card-body" style="position: relative;">
+                <div style="position: absolute; right: 20px;">
+                    <p style="font-size:60px;color: #f31742;">0</p>
+                  </div>
+                <i class="fa fa-pencil-square" aria-hidden="true" style="color: #a8a8a85e;font-size: 5em;"></i>
+              <p class="card-title">Total Reviews</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-auto">
+        <a href="{{ url_for('eventdashboard', event_id=event.id) }}" class="btn btn-danger">Details</a>
+    </div>
+    <div class="col-auto">
+        <a href="{{ url_for('update_event', event_id=event.id) }}" class="btn btn-outline-danger">Edit</a>
+    </div>
+    <div class="col-auto">
+        <a href="{{ url_for('event_reviews', event_id=event.id) }}" class="btn btn-outline-danger">Reviews</a>
+    </div>
+    <div class="col-auto">
+        <a href="{{ url_for('event_faqs', event_id=event.id) }}" class="btn btn-outline-danger">FAQs</a>
+    </div>
+</div>
+    <div class="row" style="margin-top: 30px;">
+        <div class="col-12" style="">
+            <div class="row">
+                <div class="col-12 col-md-5">
+                    <div>
+                        <div class="row" style="padding: 20px;background: #e4e4e4;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+                            <div class="col-6">
+                                Reviewer1
+                            </div>
+                            <div class="col-6">
+                                July 10, 2021
+                            </div>
+                        </div>
+                        <div class="row" style="background: white;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;margin-bottom: 20px;">
+                            <div class="col-12">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                                    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                                    occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                                    laborum
+                                    </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 offset-md-1 col-md-5">
+                    <div>
+                        <div class="row" style="padding: 20px;background: #e4e4e4;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+                            <div class="col-6">
+                                Reviewer1
+                            </div>
+                            <div class="col-6">
+                                July 10, 2021
+                            </div>
+                        </div>
+                        <div class="row" style="background: white;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;margin-bottom: 20px;">
+                            <div class="col-12">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                                    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                                    occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                                    laborum
+                                    </p>
+                            </div>
+                        </div>
+                    </div>
+                </div><div class="col-12 col-md-5">
+                    <div>
+                        <div class="row" style="padding: 20px;background: #e4e4e4;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+                            <div class="col-6">
+                                Reviewer1
+                            </div>
+                            <div class="col-6">
+                                July 10, 2021
+                            </div>
+                        </div>
+                        <div class="row" style="background: white;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;margin-bottom: 20px;">
+                            <div class="col-12">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                                    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                                    occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                                    laborum
+                                    </p>
+                            </div>
+                        </div>
+                    </div>
+                </div><div class="col-12 offset-md-1 col-md-5">
+                    <div>
+                        <div class="row" style="padding: 20px;background: #e4e4e4;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+                            <div class="col-6">
+                                Reviewer1
+                            </div>
+                            <div class="col-6">
+                                July 10, 2021
+                            </div>
+                        </div>
+                        <div class="row" style="background: white;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;margin-bottom: 20px;">
+                            <div class="col-12">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                                    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                                    occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                                    laborum
+                                    </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}

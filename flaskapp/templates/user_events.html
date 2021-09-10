@@ -1,0 +1,36 @@
+{% extends "dashboardlayout.html" %}
+{% block content %}
+    <h4 style="margin-top: 20px;">All Events</h4>
+    <div class="row">
+        <div class="col-lg-10 shadow table-div">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Event Name</th>
+                <th>Created</th>
+                <th>Booked</th>
+                <th>Status</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {% for event in events %}
+                    <td>{{ event.title }}</td>
+                    <td>{{ event.date_posted.strftime('%Y-%m-%d') }}</td>
+                    <td>0%</td>
+                    <td>Completed</td>
+                    <td><a href="">Prioritize</a></td>
+                    <td><a href="">Repost</a></td>
+                    <td><a href="">Edit</a></td>
+                    <td><a href="">Delete</a></td>
+                {% endfor %}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+{% endblock content %}

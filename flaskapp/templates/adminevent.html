@@ -1,0 +1,47 @@
+{% extends "adminlayout.html" %}
+{% block content %}
+    <h4 style="margin-top: 20px;">Event Id: {{ event.id }}</h4>
+    <div>
+        <a href="" class="btn btn-outline-danger">Delete</a>
+        <a href="" class="btn btn-outline-danger">Edit</a>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10">
+            <ul class="admineventul">
+                <li><b>Event Title: </b>{{ event.title }}</li>
+                <li><b>Event Description: </b>{{ event.description }}</li>
+                <li><b>Event Price: </b>{{ event.price }}</li>
+                <li><b>Event Location: </b>{{ event.location }}</li>
+                <li><b>Event Date: </b>{{ event.date }}</li>
+                <li><b>Event Date End: </b>{{ event. date_end}}</li>
+                <li><b>Event Time: </b>{{ event.time }}</li>
+                <li><b>Event Time End: </b>{{ event.time_end }}</li>
+                <li><b>Event Days: </b>{{ event.days }}</li>
+                <li><b>Event Previous Knowledge: </b>{{ event.pre_knowledge }}</li>
+                <li><b>Event Tag: </b>{{ event.tags }}</li>
+                <li><b>Event Schedule: </b>{{ event.schedule }}</li>
+                <li><b>Event Direction: </b>{{ event.direction }}</li>
+                <li><b>Event Equipment: </b>{{ event.equipment }}</li>
+                <li><b>Event Minimum tickets: </b>{{ event.min_tickets }}</li>
+                <li><b>Event offers: </b>{{ event.offers_bool }}</li>
+                <li><b>Discount 1: </b>${{ event.discount1 }} per {{ event.attendee1 }} persons</li>
+                <li><b>Discount 2: </b>${{ event.discount2 }} per {{ event.attendee2 }} persons</li>
+                <li><b>Discount 3: </b>${{ event.discount3 }} per {{ event.attendee3 }} persons</li>
+                <li><b>Discount 4: </b>${{ event.discount4 }} per {{ event.attendee4 }} persons</li>
+                <li><b>Discount 5: </b>${{ event.discount5 }} per {{ event.attendee5 }} persons</li>
+                <li><b>Discount 6: </b>${{ event.discount6 }} per {{ event.attendee6 }} persons</li>
+                <li><b>Discount 7: </b>${{ event.discount7 }} per {{ event.attendee7 }} persons</li>
+                <li><b>Discount 8: </b>${{ event.discount8 }} per {{ event.attendee8 }} persons</li>
+                <li><b>Event Image 1: </b><a href="{{ url_for('static', filename='event_pics/' + event.image1) }}">{{ event.image1 }}</a></li>
+                <li><b>Event Image 2: </b><a href="{{ url_for('static', filename='event_pics/' + event.image2) }}">{{ event.image2 }}</a></li>
+                <li><b>Event Image 3: </b><a href="{{ url_for('static', filename='event_pics/' + event.image3) }}">{{ event.image3 }}</a></li>
+                <li><b>Event Image 4: </b><a href="{{ url_for('static', filename='event_pics/' + event.image4) }}">{{ event.image4 }}</a></li>
+                <li><b>Event Image 5: </b><a href="{{ url_for('static', filename='event_pics/' + event.image5) }}">{{ event.image5 }}</a></li>
+                <li><b>Event Image 6: </b><a href="{{ url_for('static', filename='event_pics/' + event.image6) }}">{{ event.image6 }}</a></li>
+                <li><b>Event Image 7: </b><a href="{{ url_for('static', filename='event_pics/' + event.image7) }}">{{ event.image7 }}</a></li>
+
+            </ul>
+        </div>
+    </div>
+{% endblock content %}
